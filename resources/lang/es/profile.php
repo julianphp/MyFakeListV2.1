@@ -1,0 +1,27 @@
+<?php
+return [
+    'profile' => 'Perfil de <b>:NAME</b>',
+    'edit.profile' => 'Editar Perfil',
+    'edit.popup' => 'Editando perfil',
+    'edit.location' => 'Ubicacion:',
+    'edit.about' => 'Descripcion:',
+    'edit.close' => 'Cerrar',
+    'edit.save' => 'Guardar Cambios',
+    'edit.photo' => 'Sube una foto. Max 4MB',
+    'edit.photoError' => 'Error al subir la foto. Excede el limite maximo de 4MB.',
+    'edit.photo.save' => 'Guardar Foto',
+    'successPass' => 'La contraseña se ha actualizado correctamente.',
+    'successError' => 'Error al cambiar la contraseña. Escribe al menos 6 caracteres.',
+    'successPhoto' => 'Foto actualizada. Si la imagen no cambia, refresca la pagina con Ctrl+F5 para limpiar la cache.',
+
+        'details' => 'Detalles:',
+    'location' => 'Ubicacion:',
+    'member' => 'Mienbro desde:',
+    'list' => 'Ver lista de seguimiento',
+    'fav' => 'Animes Favoritos:',
+    'favNo' => 'Aun no tiene ningun anime favorito :(',
+    'admin' => 'Administracion de usuarios',
+    'pass' => 'Cambiar Contraseña',
+    'pass1' => 'Nueva Contraseña:',
+    'pass2' => 'Repita la contraseña:',
+];

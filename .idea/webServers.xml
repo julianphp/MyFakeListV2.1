@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f407ed59-6fa9-4a6b-9e98-a68be71961cf" name="kumiko" url="http://localhost/kumiko">
+        <fileTransfer mountedRoot="C:\xampp\htdocs\kumiko" accessType="MOUNT" port="0" />
+      </webServer>
+      <webServer id="9a5d8e36-0aec-48c4-8a82-b5ddbcfd4095" name="server" url="https://dekomoridesu.com/mal/public/inicio">
+        <fileTransfer rootFolder="/var/www/html/test/mal" accessType="SFTP" host="161.35.206.8" port="22" sshConfigId="96458ae9-cd7f-450b-a26d-c7f39dbe4bda" sshConfig="root@161.35.206.8:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

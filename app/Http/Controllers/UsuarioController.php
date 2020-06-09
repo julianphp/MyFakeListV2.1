@@ -14,6 +14,10 @@ class UsuarioController extends Controller
     public function verPerfil(Request $idUsu){
         $idUsu = $idUsu->idUsu;
          $serFav = UsuSerie::join('serie','ususer.idSe', '=','serie.idSe')->where('ususer.idUsu',$idUsu)->where('ususer.favorita','1')->get();
+
+       // $dat = self::stats($idUsu);
+        $dat = false;
+        //echo $viendo;
        //  $serFav1 = Usuario::find(11);
        //  $serFav1 = $serFav1->series->all();
        // echo "<pre>".print_r($serFav1, true)."</pre>" ;
@@ -24,7 +28,7 @@ class UsuarioController extends Controller
        //  $serFav = json_decode(json_encode($serFav), true);
        // $serFav = UsuSerie::with('serie')->where('favorita','LIKE','1') ;
        // echo $serFav[0]->titulo;
-       // echo "<pre>".print_r($serFav, true)."</pre>" ;
+        //echo "<pre>".print_r($dat, true)."</pre>" ;
         if ($serFav->isEmpty()){
             $serFav = false;
         }
@@ -34,13 +38,13 @@ class UsuarioController extends Controller
                 $usuVis = Usuario::find($idUsu);
 
 
-                return view('perfil.ver', ['user' => $user,'edit' => true,'usuario' => $usuVis, 'seriesFav' => $serFav]);
+                return view('perfil.ver', ['user' => $user,'edit' => true,'usuario' => $usuVis, 'seriesFav' => $serFav,"stats" => $dat]);
 
             } else {
                 if ( !$usuVis = Usuario::find($idUsu)){
                     return response()->view('error404',['user' => \Illuminate\Support\Facades\Auth::user()]);
                 }
-                return view('perfil.ver', ['user' => $user, 'edit' => false,'usuario' => $usuVis, 'seriesFav' => $serFav]);
+                return view('perfil.ver', ['user' => $user, 'edit' => false,'usuario' => $usuVis, 'seriesFav' => $serFav,"stats" => $dat]);
 
             }
         } else {
@@ -50,9 +54,25 @@ class UsuarioController extends Controller
                 return redirect()->intended('inicio');
             }
 
-            return view('perfil.ver', ['user' => false,'edit' =>false ,'usuario' => $usuVis, 'seriesFav' => $serFav]);
+            return view('perfil.ver', ['user' => false,'edit' =>false ,'usuario' => $usuVis, 'seriesFav' => $serFav,"stats" => $dat]);
 
         }
+    }
+    public static function stats(Request $idUsu){
+        if ($idUsu->ajax()){
+            $idUsu = $idUsu->get('usu');
+
+
+            $dat = array(
+                "all" => count(UsuSerie::all()->where('idUsu',$idUsu)),
+                "completed" => count(UsuSerie::all()->where('idUsu',$idUsu)->where('status','=','Completada')),
+                "viendo" => count(UsuSerie::all()->where('idUsu',$idUsu)->where('status','=','Viendo')),
+                "paraver" => count(UsuSerie::all()->where('idUsu',$idUsu)->where('status','=','Para_Ver')) ,
+                "drop" => count(UsuSerie::all()->where('idUsu',$idUsu)->where('status','=','Droppeada'))
+            );
+            return $dat;
+        }
+
     }
     public static function subirFoto(Request $req){
         $user = Usuario::find(Auth::id());

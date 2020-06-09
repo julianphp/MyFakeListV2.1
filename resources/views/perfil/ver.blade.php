@@ -3,6 +3,7 @@
    Perfil de {{ $usuario->alias }} - MyFakeList
 @endsection
 @section('head')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
     <script src="https://kit.fontawesome.com/b873749123.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/perfil.js') }}"></script>
     <script src="{{ asset('js/registro.js') }}"></script>
@@ -44,16 +45,26 @@
 
 
         <div class="infoSerie">
-            <p>
+            <p class="infoSerietit">
                 @lang('profile.details')</p>
 
             <hr>
             <li><b>@lang('profile.location')</b> {{ $usuario->location }} </li>
             <li><b>@lang('profile.member')</b>   {{ \Carbon\Carbon::parse($usuario->created_at)->format('d-m-Y') }} </li>
-            <div><a class="btn btn-primary" href="{{ route('lista.ver',['idUsu'=> $usuario->idUsu,'alias' => $usuario->alias]) }}" role="button">@lang('profile.list')</a>       </div>
-        </div>
 
-        @if( $edit == true)
+            <hr>
+               <p class="infoSerietit">Estadisticas de Anime</p>
+            {{--
+            <li><b>Total:</b>  {{ $stats['all'] }}</li>
+            <li><b>Viendo:</b>   {{ $stats['viendo']}} </li>
+            <li><b>Completados:</b>   {{ $stats['completed'] }} </li>
+            <li><b>Dropped:</b>  {{ $stats['drop'] }} </li>
+            <li><b>Planeados para ver:</b>  {{ $stats['paraver'] }}   </li>--}}
+            <hr>
+        </div>
+        <div><a class="btn btn-primary" href="{{ route('lista.ver',['idUsu'=> $usuario->idUsu,'alias' => $usuario->alias]) }}" role="button">@lang('profile.list')</a>       </div>
+
+    @if( $edit == true)
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#infoUsu">
                 @lang('profile.edit.profile')
             </button>
@@ -63,6 +74,7 @@
 
             @endif
         @endif
+
 
 
 
@@ -89,6 +101,9 @@
 
 
         </div>
+        {{ $usuario->idUsu }}
+        <input type="text" id="123" name="idUsu" value="{{ $usuario->idUsu }}" hidden>
+        <canvas id="pieChart"></canvas>
 
     </div>
 </div>
@@ -98,4 +113,5 @@
 @if($edit == true)
 @include('perfil.ajustes')
 @endif
+    <script src="{{ asset('js/chart.js') }}"></script>
 @endsection

@@ -68,6 +68,7 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
     Route::prefix('perfil')->group(function (){
             Route::get('ver/{idUsu}/{alias}','UsuarioController@verPerfil')->where('alias', '(.*)')->name('perfil.ver');
             Route::post('foto','UsuarioController@subirFoto')->name('perfil.foto');
+            Route::match(['get','post'],'stats','UsuarioController@stats')->name('perfil.stats');
             Route::post('busqueda1', 'SerieController@busqueda')->name('busqueda');
             //Route::post('editInfoUsu', 'UsuarioController@editInfoUsu')->name('editInfoUsu');
             Route::post('infousua', 'UsuarioController@editInfoUsu')->name('perfil.infousua');

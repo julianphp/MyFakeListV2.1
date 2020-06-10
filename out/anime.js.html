@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: anime.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: anime.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Ajax request for change the status anime of the user
+ * @param usu
+ * @param se
+ */
+function setEst(usu, se) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+
+        url: APP_URL+'/serie/status',
+        type: 'POST',
+        dataType: 'HTML',
+        data: {
+            usu : usu,
+            se : se,
+        },
+    })
+        .done(function (data) {
+
+            location.reload();
+        })
+
+}
+
+/**
+ * Ajax request to update a eps seeing for the user
+ * @param usu
+ * @param se
+ */
+function subeCa(usu, se) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: APP_URL+'/serie/cap',
+        type: 'POST',
+        dataType: 'HTML',
+        data: { usu : usu,
+                se : se
+        },
+
+    })
+        .done(function (data) {
+            $("#cap"+se).html(data);
+        })
+}
+
+/**
+ * Ajax request for update the score of the user anime
+ * @param usu
+ * @param se
+ * @param sc
+ */
+function subeSc(usu, se, sc){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url:APP_URL+'/serie/score',
+        type: 'POST',
+        dataType: 'HTML',
+        data: {
+            usu : usu,
+            se : se,
+            sc : sc,
+        }
+
+    })
+
+}
+
+/**
+ * Ajax request for delete a anime user in list
+ * @param usu
+ * @param se
+ */
+function borraSeUsu(usu, se){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url : APP_URL+'/serie/borrarUsuSe',
+        type : 'POST',
+        dataType: 'HTML',
+        data : {
+            usu : usu,
+            se : se
+        },
+    })
+        .done(function (data) {
+            location.reload();
+        })
+}
+
+/**
+ * Ajax Request to change the status of the anime user
+ * @param usu
+ * @param se
+ * @param est
+ */
+function modEst(usu, se, est){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url : APP_URL+'/serie/modStatus',
+        type : 'POST',
+        dataType: 'HTML',
+        data : {
+            usu : usu,
+            se : se,
+            est : est
+        }
+    })
+        .done(function () {
+            location.reload();
+        })
+}
+
+/** Ajax Request to add an anime to favorites
+ *
+ * @param usu
+ * @param se
+ * @param opeS
+ */
+function modFav(usu, se, opeS){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url : APP_URL+'/serie/favoritos',
+        type: 'POST',
+        dataType: 'HTML',
+        data : {
+            usu : usu,
+            se : se,
+            opeS : opeS
+        }
+    })
+        .done(function () {
+            location.reload();
+        })
+}
+
+$(document).ready(function () {
+    /**
+     * Select the status and call to the ajax function
+     */
+    $(".selEst").focusout(function () {
+        var sts = $(this).val();
+        var usu = $(this).data("usu");
+        var se = $(this).data("se");
+        if (sts === "Para Ver") {
+            sts = "Para_Ver";
+        }
+        modEst(usu, se,sts);
+
+
+
+    });
+    /**
+     * Add the anime to the anime list of the user at click in the botton
+     */
+    $("#add").click(function () {
+        var usu = $(this).data("usu");
+        var se = $(this).data("se");
+
+        setEst(usu,se);
+
+    });
+
+    /**
+     * Up a eps watch for the user and call to the ajax function
+     */
+    $( ".fa-plus-circle" ).click(function() { // repetida de lista;
+        var usu = $(this).data("usu");
+        var se = $(this).data("se");
+        subeCa(usu, se);
+    });
+    /**
+     * Upload the score
+     */
+    $(".score").focusout(function () { // repetida de lista pero con cosas borradas
+        var score = $(this).val();
+        var usu = $(this).data("usu");
+        var se = $(this).data("se");
+        if (!isNaN(score)) {
+            subeSc(usu,se,score);
+        }
+
+
+
+    });
+    /**
+     * Delete the anime of the anime list.
+     */
+    $("#btnd").click(function () {
+
+        var usu = $(this).data("usu");
+        var se = $(this).data("se");
+        var ti = $(this).data("til");
+        $("#borrarserie").modal();
+        $("#md").text(ti);
+        $("#del").click(function () {
+            borraSeUsu(usu, se);
+        })
+
+    });
+    /**
+     * Add/delete to the favirites user list
+     */
+    $("#fav").click(function () {
+        var fav = $(this).data("ope");
+        var usu = $(this).data("usu");
+        var se = $(this).data("se");
+        modFav(usu,se, fav);
+    });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="modifiers.html">modifiers</a></li></ul><h3>Classes</h3><ul><li><a href="-_._node_modules_axios_lib_cancel_Cancel.js_-Cancel.html">Cancel</a></li><li><a href="-_._node_modules_axios_lib_cancel_CancelToken.js_-CancelToken.html">CancelToken</a></li><li><a href="-_.html">_</a></li><li><a href="Popper.html">Popper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#borrar">borrar</a></li><li><a href="global.html#borraSeUsu">borraSeUsu</a></li><li><a href="global.html#compruebaNick">compruebaNick</a></li><li><a href="global.html#dataObject">dataObject</a></li><li><a href="global.html#getInfo">getInfo</a></li><li><a href="global.html#modEst">modEst</a></li><li><a href="global.html#modFav">modFav</a></li><li><a href="global.html#ModifierFn">ModifierFn</a></li><li><a href="global.html#obtener_registros">obtener_registros</a></li><li><a href="global.html#recuperar">recuperar</a></li><li><a href="global.html#referenceObject">referenceObject</a></li><li><a href="global.html#setEst">setEst</a></li><li><a href="global.html#subDes">subDes</a></li><li><a href="global.html#subeCa">subeCa</a></li><li><a href="global.html#subeSc">subeSc</a></li><li><a href="global.html#usu">usu</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed Jun 10 2020 23:39:39 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

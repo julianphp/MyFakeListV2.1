@@ -43,6 +43,9 @@
                     <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#staticBackdrop">
                         @lang('profile.pass')
                     </button>
+                    <button type="button" class="btn btn-primary " id="btnEmail" data-toggle="modal2" data-target="#staticBackdrop1">
+                        @lang('profile.email')
+                    </button>
                 </div>
 
                 <div class="modal-footer">
@@ -55,41 +58,6 @@
         </div>
     </div>
 </div>
+@include('perfil.changeEmail')
 
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">@lang('profile.pass')</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="{{ route('perfil.password') }}">
-                    <div class="form-group">
-                        @csrf
-                        <input type="hidden" name="idUsu" value="{{ $user->idUsu }}" >
-                        <label for="pass">@lang('profile.pass1')</label>
-                        <input type="password" class="form-control pass" id="pass" name="pass"  maxlength="50">
-                        <button type="button" class="btn btn-danger passreq" hidden>@lang('messages.register.passV')</button>
-
-                    </div>
-                    <div class="form-group">
-                        @csrf
-                        <label for="pass1">@lang('profile.pass2')</label>
-                        <input type="password" class="form-control passcon" id="pass1" name="pass1"  maxlength="50">
-                        <button type="button" class="btn btn-danger passfail" hidden>@lang('messages.register.passC')</button>
-                    </div>
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('profile.edit.close')</button>
-                <button type="submit" class="btn btn-primary" id="env">@lang('profile.edit.save')</button>
-            </div>
-                </form>
-            </div>
-    </div>
-</div>
+@include('perfil.changepass')

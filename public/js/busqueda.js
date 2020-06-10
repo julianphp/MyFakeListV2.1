@@ -1,4 +1,7 @@
-
+/**
+ * Search AJAX, seaarch anime an users
+ * @param texto
+ */
 function obtener_registros(texto)
 {
     $.ajaxSetup({
@@ -23,6 +26,9 @@ function obtener_registros(texto)
         })
 }
 
+/**
+ * Send the characterer type in the search box
+ */
 $(document).on('keyup', '#busqueda', function()
 {
 

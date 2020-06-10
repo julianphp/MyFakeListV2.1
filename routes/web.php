@@ -17,24 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
+
 Route::get('setlocale/{locale}',function($lang){ // añade el idioma a la variable de sesion
     Session::put('locale',$lang);
     return redirect()->back();
 });
-Route::fallback(function(){
-    return response()->view('error404',['user' => \Illuminate\Support\Facades\Auth::user()]);
-});
-Route::get("test_mail", function(Request $r){
-    $destinatario = "julianwindows8@hotmail.es";
-    $nombre = "Luis Cabrera Benito";
-    // Armar correo y pasarle datos para el constructor
-    $correo = new \App\Http\Controllers\ServicioCorreo($nombre);
-    # ¡Enviarlo!
-    \Mail::to($destinatario)->send($correo);
-});
 Route::group(['middleware'=>'language'],function (){ // middleware change language
+    Route::fallback(function(){
+
+        return redirect()->action('Error404@error404');
+    });
+
     Route::get('inicio', 'indexController@index')->name('inicio');
-    Route::view('error404','error404',['user' => \Illuminate\Support\Facades\Auth::user()]);
+    Route::get('error404', 'Error404@error404')->name('error404');
+    Route::get('/', 'indexController@index')->name('inicio');
     //Route::match(['get','post'],'busqueda1', 'SerieController@busqueda');
     Route::post('busqueda1', 'SerieController@busqueda')->name('busqueda');
     Route::get('UsoDeApi','InfoAPI@info')->name('UsoDeApi');
@@ -76,6 +72,7 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
 
         // Route::match(['get','post'],'ver', 'UsuarioController@verPerfil')->name('ver');
     });
+
     Route::prefix('lista')->group(function (){
            Route::get('ver/{idUsu}/{alias}','ListaController@lista')->where('alias', '(.*)')->name('lista.ver');
            Route::post('busqueda1', 'SerieController@busqueda')->name('busqueda');
@@ -85,6 +82,11 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
            Route::post('review', 'ListaController@review');
     });
 
+    Route::prefix('email')->group(function (){
+        Route::post('change','EmailNew@sendVerification')->name('email.change');
+        Route::match(['get','post'],'verify/{token}','EmailNew@verifyEMail')->name('email.verify');
+
+    });
 
 }); // end middleware language
 //Auth::routes();

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class RegistroController extends Controller
 {
+    /** Registry of the users, check if the email are in user, that the password are ok and the nick is ok
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function registro(Request $request){
 
         if (!Auth::check()) {
@@ -56,6 +60,14 @@ class RegistroController extends Controller
 
 
     }
+
+    /** Insert the new user in the table
+     * @param $alias
+     * @param $email
+     * @param $password
+     * @param $avatar
+     * @return bool
+     */
     private  function inserUsu($alias,$email,$password,$avatar){
         $usu = new Usuario();
         $usu->alias = $alias;
@@ -66,6 +78,11 @@ class RegistroController extends Controller
         $usu->location = NULL;
         return $usu->save();
     }
+
+    /** check if the alias is taken or no. AJAX function
+     * @param Request $req
+     * @return false|string|void
+     */
     public function alias(Request $req){
         if ($req->ajax()){
 

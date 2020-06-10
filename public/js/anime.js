@@ -1,3 +1,8 @@
+/**
+ * Ajax request for change the status anime of the user
+ * @param usu
+ * @param se
+ */
 function setEst(usu, se) {
     $.ajaxSetup({
         headers: {
@@ -20,6 +25,12 @@ function setEst(usu, se) {
         })
 
 }
+
+/**
+ * Ajax request to update a eps seeing for the user
+ * @param usu
+ * @param se
+ */
 function subeCa(usu, se) {
     $.ajaxSetup({
         headers: {
@@ -39,6 +50,13 @@ function subeCa(usu, se) {
             $("#cap"+se).html(data);
         })
 }
+
+/**
+ * Ajax request for update the score of the user anime
+ * @param usu
+ * @param se
+ * @param sc
+ */
 function subeSc(usu, se, sc){
     $.ajaxSetup({
         headers: {
@@ -59,6 +77,12 @@ function subeSc(usu, se, sc){
     })
 
 }
+
+/**
+ * Ajax request for delete a anime user in list
+ * @param usu
+ * @param se
+ */
 function borraSeUsu(usu, se){
     $.ajaxSetup({
         headers: {
@@ -79,6 +103,13 @@ function borraSeUsu(usu, se){
             location.reload();
         })
 }
+
+/**
+ * Ajax Request to change the status of the anime user
+ * @param usu
+ * @param se
+ * @param est
+ */
 function modEst(usu, se, est){
     $.ajaxSetup({
         headers: {
@@ -99,6 +130,13 @@ function modEst(usu, se, est){
             location.reload();
         })
 }
+
+/** Ajax Request to add an anime to favorites
+ *
+ * @param usu
+ * @param se
+ * @param opeS
+ */
 function modFav(usu, se, opeS){
     $.ajaxSetup({
         headers: {
@@ -119,7 +157,11 @@ function modFav(usu, se, opeS){
             location.reload();
         })
 }
+
 $(document).ready(function () {
+    /**
+     * Select the status and call to the ajax function
+     */
     $(".selEst").focusout(function () {
         var sts = $(this).val();
         var usu = $(this).data("usu");
@@ -132,7 +174,9 @@ $(document).ready(function () {
 
 
     });
-    // añade la serie a la lista de seguimiento del usuario
+    /**
+     * Add the anime to the anime list of the user at click in the botton
+     */
     $("#add").click(function () {
         var usu = $(this).data("usu");
         var se = $(this).data("se");
@@ -141,13 +185,17 @@ $(document).ready(function () {
 
     });
 
-    //sube un capitulo visto
+    /**
+     * Up a eps watch for the user and call to the ajax function
+     */
     $( ".fa-plus-circle" ).click(function() { // repetida de lista;
         var usu = $(this).data("usu");
         var se = $(this).data("se");
         subeCa(usu, se);
     });
-    // sube la puntuacion
+    /**
+     * Upload the score
+     */
     $(".score").focusout(function () { // repetida de lista pero con cosas borradas
         var score = $(this).val();
         var usu = $(this).data("usu");
@@ -159,6 +207,9 @@ $(document).ready(function () {
 
 
     });
+    /**
+     * Delete the anime of the anime list.
+     */
     $("#btnd").click(function () {
 
         var usu = $(this).data("usu");
@@ -171,6 +222,9 @@ $(document).ready(function () {
         })
 
     });
+    /**
+     * Add/delete to the favirites user list
+     */
     $("#fav").click(function () {
         var fav = $(this).data("ope");
         var usu = $(this).data("usu");

@@ -1,10 +1,22 @@
 
 $(document).ready(function () {
+    /**
+     * Show the modal 1 for change the password
+     */
     $(".btn1").click(function () {
 
-        $(".modal").modal('show');
+        $(".modal1").modal();
     });
+    /**
+     * Show the modal 2 for change the email
+     */
+    $("#btnEmail").click(function () {
 
+        $(".modal2").modal();
+    });
+    /**
+     * Get the name of the file for upload an avatar
+     */
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);

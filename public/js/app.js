@@ -1926,6 +1926,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+/**
+ * Axios request to get some anime random and show in the template.
+ * Used the Ziggy Router for the route to the view.
+ */
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Espacio",
   data: function data() {
@@ -50926,9 +50931,9 @@ if (typeof window !== 'undefined' && typeof window.Ziggy !== 'undefined') {
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
+/***/ "./resources/sass/est.sass":
 /*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
+  !*** ./resources/sass/est.sass ***!
   \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -51261,13 +51266,13 @@ function route(name, params, absolute, customZiggy) {
 
 /***/ 0:
 /*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
+  !*** multi ./resources/js/app.js ./resources/sass/est.sass ***!
   \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\Users\julia\PhpstormProjects\mal\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\julia\PhpstormProjects\mal\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\julia\PhpstormProjects\mal\resources\sass\est.sass */"./resources/sass/est.sass");
 
 
 /***/ })

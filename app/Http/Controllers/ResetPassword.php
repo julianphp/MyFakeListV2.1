@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 class ResetPassword extends Controller
 {
+    /** Send the email for change the password. Create a new token in the table password_resets
+     * @param Request $req
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public static function sendMail(Request $req)
     {
         if (Auth::check()) {
@@ -44,7 +48,7 @@ class ResetPassword extends Controller
         }
     }
 
-    /**
+    /** Change to the new password. Check if the token is valid, or was used or expired.
      * @param Request $req
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */

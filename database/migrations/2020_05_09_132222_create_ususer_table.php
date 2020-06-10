@@ -17,7 +17,7 @@ class CreateUsuserTable extends Migration
             $table->foreignId('idUsu')
                 ->references('idUsu')
                 ->on('usuario')
-                ->onDelete('cascade');;
+                ->onDelete('cascade');
 
             $table->foreignId('idSe')
                 ->references('idSe')

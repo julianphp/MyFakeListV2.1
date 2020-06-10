@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Session;
 
+/**
+ * Class ServicioCorreo
+ * @package App\Http\Controllers
+ */
 class ServicioCorreo extends Mailable
 {
 
@@ -34,7 +38,7 @@ class ServicioCorreo extends Mailable
             ->subject("Bienvenida a mi sitio");
     }
 
-    /**
+    /** Send the email to the user.
      * @param $email
      * @param $token
      * @return bool
@@ -60,6 +64,32 @@ class ServicioCorreo extends Mailable
         }
 
        // return redirect()->back();
+    }
+
+    /** Send the email verification email to the user
+     * @param $email
+     * @param $token
+     * @return bool
+     */
+    public static function sendEmailVerification($email,$token){
+        if (App::getLocale() == "en"){
+            $subject = "Your link to activate the new email - MyFakeList";
+        } else {
+            $subject = "Tu link para activar el nuevo correo - MyFake List";
+        }
+
+        $for = $email;
+        $token = ['token' => $token];
+        try {
+            Mail::send('email.activateEmail',$token, static function($msj) use($subject,$for){
+                $msj->from("myfakelist@kumiko.es","MyFakeList");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+            return true;
+        } catch (\Exception $e){
+            return false;
+        }
     }
 
 }

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
+    /** Login for the api to get the token
+     * @param Request $req
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $req){
 
         if (!Auth::attempt(request(['email', 'password']))){
@@ -26,6 +30,10 @@ class LoginController extends Controller
             'token'   => $token->accessToken,
         ], 200);
     }
+
+    /** Logout for the api
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(){
         Auth::user()->token()->revoke();
         return response()->json([

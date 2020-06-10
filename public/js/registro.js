@@ -1,4 +1,7 @@
-
+/**
+ * AJAX Request Check if the nick is in use or not
+ * @param txt
+ */
 function compruebaNick(txt){
     $.ajaxSetup({
         headers: {
@@ -30,6 +33,9 @@ function compruebaNick(txt){
 $(document).ready(function () {
     hidden1 = "";
     hidden = "";
+    /**
+     * Check if the nick comply the requeriments
+     */
     $(".nick").keyup(function () {
         var txt = $(this).val();
         if (txt.length > 20){
@@ -45,7 +51,9 @@ $(document).ready(function () {
 
 
     });
-    //usado para el registro y el cambio de contraseña
+    /**
+     * check that the password comply the minimun requeriment
+     */
     $(".pass").focusout(function () {
         var pass = $(this).val();
         if (pass.length < 6){
@@ -62,7 +70,9 @@ $(document).ready(function () {
 
         }
     })
-    // usado para el registro y el cambio de contraseña
+    /**
+     * Compere both password if are the same or not
+     */
     $(".passcon").keyup(function () {
         var pass = $(".pass").val();
         var pass1 = $(this).val();

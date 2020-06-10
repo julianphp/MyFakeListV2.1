@@ -8,6 +8,10 @@ use App\Models\Usuario;
 
 class UsuarioController
 {
+    /** Get an user by id
+     * @param int $idUsu
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function find(int $idUsu){
         if (!Usuario::find($idUsu)){
             return response()->json([
@@ -18,6 +22,11 @@ class UsuarioController
             return response()->json(Usuario::find($idUsu));
         }
     }
+
+    /** Search an user by name
+     * @param string $usuario
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function usuario(string $usuario){
         $usu = Usuario::usuario($usuario);
         if ($usu->isEmpty()){

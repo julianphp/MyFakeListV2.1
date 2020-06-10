@@ -6,6 +6,7 @@ use App\Models\Genero;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Serie;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -18,6 +19,10 @@ class indexController extends Controller
     public function __construct()
     {
     }
+
+    /** Show some series in the index
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
 
         $romance = Genero::find(22)->serie->random(8);
@@ -44,4 +49,5 @@ class indexController extends Controller
             $this->GenRandom();
         }
     }
+
 }

@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\DB;
 
 class SerieController extends Controller
 {
-
+    /** REsponse with the anime id requested. Get the study, genres, related. Also check if the user has these anime in
+     * their list for display add options or edits options
+     * @param Request $idSe
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function ver(Request $idSe){
 
 
@@ -23,7 +27,7 @@ class SerieController extends Controller
 
 
         if (!$dat = Serie::find($id)) {
-            return response()->view('error404',['user' => \Illuminate\Support\Facades\Auth::user()]);
+            return redirect()->action('Error404@error404');
         }  //busca la serie
         $est = Serie::find($id)->estudio; // busca el estudio al que pertenece la serie
         $rel = Serie::find($id)->relacionados; // busca las series relacionadas
@@ -67,6 +71,10 @@ class SerieController extends Controller
         return view('serie.ver',['serie' => $dat, 'estudio' => $est,'rel' => $rel,'serRel' => $serRel , 'gen' => $gen, 'user' => $user]);
     }
 
+    /** AJAX SEARCH. Search anime and users
+     * @param Request $req
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
      public function busqueda(Request $req){
         if ($req->ajax()){
             $serie = Serie::titulo($req->get('texto'));

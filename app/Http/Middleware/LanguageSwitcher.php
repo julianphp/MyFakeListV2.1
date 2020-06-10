@@ -8,7 +8,7 @@ use Session;
 use Config;
 class LanguageSwitcher
 {
-    /**
+    /** Set the language in the web page
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request

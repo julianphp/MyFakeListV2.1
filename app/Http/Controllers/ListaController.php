@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ListaController extends Controller
 {
+    /** Show the anime list of the user Request. If the list request is the same that de user logged, they can modificy the status
+     * @param Request $req
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
+     */
     public function lista(Request $req){
 
         $idUsu = $req->idUsu;
         if(!$aliasUsu = Usuario::find($idUsu)){
-            return response()->view('error404',['user' => \Illuminate\Support\Facades\Auth::user()]);
+            return redirect()->action('Error404@error404');
         }
 
 
@@ -48,6 +52,9 @@ class ListaController extends Controller
 
     }
 
+    /** Change the score of the anime
+     * @param Request $req
+     */
     public function score(Request $req){
         if ($req->ajax()){
             if ($req->get('usu') == Auth::id())
@@ -56,6 +63,11 @@ class ListaController extends Controller
                 ->update(['score' => $req->get('sc')]);
         }
     }
+
+    /** Change the episode view of the user
+     * @param Request $req
+     * @return int
+     */
     public function capitulo(Request $req){
         if ($req->ajax()){
             if ($req->get('usu')== Auth::id() ){
@@ -87,6 +99,9 @@ class ListaController extends Controller
         }
     }
 
+    /** Change the review of the anime that have the user
+     * @param Request $req
+     */
     public function review(Request $req){
         if ($req->ajax()){
             if (Auth::id() == $req->get('usu')) {
@@ -96,6 +111,10 @@ class ListaController extends Controller
             }
         }
     }
+
+    /** Add a new anime to the list of the user.
+     * @param Request $req
+     */
     public function status(Request $req){
         if ($req->ajax()){
             if ($req->get('usu') == Auth::id()){
@@ -120,6 +139,10 @@ class ListaController extends Controller
 
         }
     }
+
+    /** Delete an anime of the user list
+     * @param Request $req
+     */
     public function borrarUsuSe(Request $req){
         if ($req->ajax()){
             if (Auth::id() == $req->get('usu')){
@@ -130,6 +153,10 @@ class ListaController extends Controller
             }
         }
     }
+
+    /** Change the status of an anime that are seing the user
+     * @param Request $req
+     */
     public function modStatus(Request $req){
         if ($req->ajax()){
 
@@ -140,6 +167,10 @@ class ListaController extends Controller
             }
         }
     }
+
+    /** add an anime to favorites user list
+     * @param Request $req
+     */
     public function favoritos(Request $req){
         if ($req->ajax()){
             if (Auth::id() == $req->get('usu')){
@@ -155,6 +186,11 @@ class ListaController extends Controller
             }
         }
     }
+
+    /** Edit options of the Modal in anime list
+     * @param Request $req
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function editSerieUsu(Request $req){
         $id = $req->get('idUsu');
         if (Auth::id() == $id )
@@ -175,6 +211,10 @@ class ListaController extends Controller
             return redirect()->back();
     }
 
+    /** Update the status of the anime
+     * @param $sts
+     * @param $serie
+     */
     private function updateStatus($sts,$serie){
         $estados = array(
             0 => "Viendo",
@@ -194,12 +234,20 @@ class ListaController extends Controller
 
     }
 
+    /** Update the review of the user
+     * @param $idSe
+     * @param $txt
+     */
     private function updateReview($idSe,$txt){
         UsuSerie::usuario(Auth::id())
             ->serie($idSe)
             ->update(['review' => $txt] );
     }
 
+    /** Update the eps seeing of the user
+     * @param $idSe
+     * @param $cap
+     */
     private function updateCap($idSe,$cap){
         $serieUsu = UsuSerie::join('serie','ususer.idSe', '=','serie.idSe')
             ->where('ususer.idUsu',Auth::id())

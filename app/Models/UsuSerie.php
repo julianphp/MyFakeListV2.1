@@ -21,12 +21,22 @@ class UsuSerie extends Model
         return $this->hasMany(Serie::class,'idSe');
     }
   */
-
+    /** Scope search for usuario
+     * @param $query
+     * @param $idUsu
+     * @return mixed
+     */
     public function scopeUsuario($query,$idUsu){
         if ($idUsu){
             return $query->where('idUsu','LIKE',"%$idUsu%");
         }
     }
+
+    /** Scope search for serie
+     * @param $query
+     * @param $idSe
+     * @return mixed
+     */
     public function scopeSerie($query,$idSe){
         if ($idSe){
             return $query->where('idSe','LIKE',"%$idSe%");

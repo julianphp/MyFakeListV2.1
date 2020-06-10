@@ -23,11 +23,23 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'email','updated_at','password', 'remember_token','is_admin'
     ];
+
+    /** Scope seach for ususuario
+     * @param $query
+     * @param $usuario
+     * @return mixed
+     */
     public function scopeUsuario($query,$usuario){
         if ($usuario){
             return $query->where('alias','LIKE',"%$usuario%")->orderBy('alias')->get();
         }
     }
+
+    /** Scope search for email
+     * @param $query
+     * @param $email
+     * @return mixed
+     */
     public function scopeEmail($query,$email){
         if ($email){
             return $query->where('email','LIKE',"$email");

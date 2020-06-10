@@ -11,11 +11,17 @@ use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
+    /** show the request profile user. If is the user logged, they can edit their options
+     * @param Request $idUsu
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     */
     public function verPerfil(Request $idUsu){
         $idUsu = $idUsu->idUsu;
          $serFav = UsuSerie::join('serie','ususer.idSe', '=','serie.idSe')->where('ususer.idUsu',$idUsu)->where('ususer.favorita','1')->get();
 
        // $dat = self::stats($idUsu);
+        //echo "<pre>".print_r($dat, true)."</pre>" ;
+       // die();
         $dat = false;
         //echo $viendo;
        //  $serFav1 = Usuario::find(11);
@@ -28,7 +34,7 @@ class UsuarioController extends Controller
        //  $serFav = json_decode(json_encode($serFav), true);
        // $serFav = UsuSerie::with('serie')->where('favorita','LIKE','1') ;
        // echo $serFav[0]->titulo;
-        //echo "<pre>".print_r($dat, true)."</pre>" ;
+
         if ($serFav->isEmpty()){
             $serFav = false;
         }
@@ -42,7 +48,7 @@ class UsuarioController extends Controller
 
             } else {
                 if ( !$usuVis = Usuario::find($idUsu)){
-                    return response()->view('error404',['user' => \Illuminate\Support\Facades\Auth::user()]);
+                    return redirect()->action('Error404@error404');
                 }
                 return view('perfil.ver', ['user' => $user, 'edit' => false,'usuario' => $usuVis, 'seriesFav' => $serFav,"stats" => $dat]);
 
@@ -51,15 +57,19 @@ class UsuarioController extends Controller
 
 
             if ( !$usuVis = Usuario::find($idUsu)){
-                return redirect()->intended('inicio');
+                return redirect()->action('Error404@error404');
             }
 
             return view('perfil.ver', ['user' => false,'edit' =>false ,'usuario' => $usuVis, 'seriesFav' => $serFav,"stats" => $dat]);
 
         }
     }
-    public static function stats(Request $idUsu){
-        if ($idUsu->ajax()){
+
+    /** Retrieve the user stats of their anime list. AJAX Request
+     * @param Request $idUsu
+     * @return array
+     */
+    public function stats(Request $idUsu ){
             $idUsu = $idUsu->get('usu');
 
 
@@ -71,10 +81,15 @@ class UsuarioController extends Controller
                 "drop" => count(UsuSerie::all()->where('idUsu',$idUsu)->where('status','=','Droppeada'))
             );
             return $dat;
-        }
+
 
     }
-    public static function subirFoto(Request $req){
+
+    /** Upload an image to change the user avatar.
+     * @param Request $req
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function subirFoto(Request $req){
         $user = Usuario::find(Auth::id());
         if ( (($req->file('img')->getMimeType() == "image/png") || ($req->file('img')->getMimeType() == "image/jpeg"))
                 && ($req->file('img')->getSize() < '4194304') ) {
@@ -92,7 +107,12 @@ class UsuarioController extends Controller
 
 
     }
-    public static function editInfoUsu(Request $req){
+
+    /** change the user info
+     * @param Request $req
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function editInfoUsu(Request $req){
         if (Auth::id() == $req->get('idUsu')){
             Usuario::find(Auth::id())
                      ->update(['location'=> $req->get('location'),
@@ -101,7 +121,12 @@ class UsuarioController extends Controller
         return redirect()->back();
 
     }
-    public static function password(Request $req){
+
+    /** Change the user password
+     * @param Request $req
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function password(Request $req){
         if (Auth::id() == $req->get('idUsu')){
             $pass = $req->get('pass');
             $pass1 = $req->get('pass1');

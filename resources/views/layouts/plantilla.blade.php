@@ -8,7 +8,8 @@
         src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/est.css') }}">
+
     <script src="{{ asset('js/busqueda.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content= "index, follow">

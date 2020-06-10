@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class SerieController extends Controller
 {
+    /** Search an anime by id
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function find(int $id){
         if (!Serie::find($id)){
             return response()->json([
@@ -21,6 +25,11 @@ class SerieController extends Controller
         }
 
     }
+
+    /** Search an anime for type
+     * @param string $tipo
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function tipo(string $tipo){
         $ser = Serie::where('tipo',$tipo)->get();
         if ($ser->isEmpty()){
@@ -32,6 +41,11 @@ class SerieController extends Controller
             return response()->json($ser);
         }
     }
+
+    /** search an anime for the tittle
+     * @param string $titulo
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function titulo(string $titulo){
         $ser = Serie::titulo($titulo);
         if ($ser->isEmpty()){
@@ -43,6 +57,10 @@ class SerieController extends Controller
             return response()->json($ser);
         }
     }
+
+    /** AXIOS request. Get 8 anime random
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function random(){
         return response()->json(Serie::all()->random(8));
     }

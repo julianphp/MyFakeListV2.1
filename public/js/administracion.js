@@ -1,3 +1,7 @@
+/**
+ * AJAX request for softDeleting a user.
+ * @param usu
+ */
 function borrar(usu) {
     $.ajaxSetup({
         headers: {
@@ -16,6 +20,11 @@ function borrar(usu) {
             location.reload();
         })
 }
+
+/**
+ * AJAX request for retryeve a user softdeleted
+ * @param usu
+ */
 function recuperar(usu) {
     $.ajaxSetup({
         headers: {
@@ -35,7 +44,11 @@ function recuperar(usu) {
         })
 }
 
+
 $(document).ready(function () {
+    /**
+     * Modal Alert for delete a user
+     */
     $(".btn1").click(function () {
 
         id = $(this).data('id');
@@ -49,11 +62,16 @@ $(document).ready(function () {
         $(".rec").prop("hidden","e")
         $(".modal").modal('show');
     });
-
+    /**
+     * Call to AJAX function to delete a user
+     */
     $(".del").click(function () {
 
         borrar(id);
     });
+    /**
+     * Modal for rescue a user softdelete
+     */
     $(".btnR").click(function () {
 
         id = $(this).data('id');
@@ -69,6 +87,9 @@ $(document).ready(function () {
 
 
     });
+    /**
+     * Call to the ajax function at click in the boton.
+     */
     $(".rec").click(function () {
 
         recuperar(id);

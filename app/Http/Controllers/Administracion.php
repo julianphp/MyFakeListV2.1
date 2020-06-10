@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Administracion extends Controller
 {
-    /**
+    /** Check if the user is an admin, and show the admin center for manage users or return to the inicio if is not admin
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function admin(){
@@ -30,7 +31,7 @@ class Administracion extends Controller
         }
     }
 
-    /**
+    /** Soft Delete an user and check that is not an admin
      * @param Request $req
      */
     public function borrar(Request $req){
@@ -47,7 +48,7 @@ class Administracion extends Controller
         }
     }
 
-    /**
+    /** recovers the user that has been softdelete
      * @param Request $req
      */
     public function recuperar(Request $req){

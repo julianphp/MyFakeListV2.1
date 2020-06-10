@@ -14,6 +14,10 @@
 </template>
 
 <script>
+    /**
+     * Axios request to get some anime random and show in the template.
+     * Used the Ziggy Router for the route to the view.
+     */
     import axios from 'axios'
     export default {
         name: "Espacio",

@@ -18,7 +18,22 @@
             @lang('profile.edit.photoError')
         </div>
     @endif
-    @if (session('successPhoto'))
+    @if (session('errorEmail'))
+        <div class="alert alert-danger">
+           @lang('profile.errorEmail')
+        </div>
+    @endif
+    @if (session('errorEmailSend'))
+        <div class="alert alert-danger">
+           @lang('profile.errorEmailSend')
+        </div>
+    @endif
+    @if (session('successEmail'))
+        <div class="alert alert-info">
+           @lang('profile.successEmail',['email' => session('successEmail')])
+        </div>
+    @endif
+    @if (session('successPhoto') == true)
         <div class="alert alert-info">
             @lang('profile.successPhoto')
         </div>
@@ -54,12 +69,12 @@
 
             <hr>
                <p class="infoSerietit">Estadisticas de Anime</p>
-            {{--
-            <li><b>Total:</b>  {{ $stats['all'] }}</li>
-            <li><b>Viendo:</b>   {{ $stats['viendo']}} </li>
-            <li><b>Completados:</b>   {{ $stats['completed'] }} </li>
-            <li><b>Dropped:</b>  {{ $stats['drop'] }} </li>
-            <li><b>Planeados para ver:</b>  {{ $stats['paraver'] }}   </li>--}}
+
+            <li><b>@lang('profile.all')</b>  <span id="all"></span></li>
+            <li><b>@lang('profile.watch')</b>   <span id="viendo"></span> </li>
+            <li><b>@lang('profile.completed')</b>   <span id="completed"></span> </li>
+            <li><b>@lang('profile.drop')</b>  <span id="drop"></span> </li>
+            <li><b>@lang('profile.plantowach')</b>  <span id="ptw"></span>   </li>
             <hr>
         </div>
         <div><a class="btn btn-primary" href="{{ route('lista.ver',['idUsu'=> $usuario->idUsu,'alias' => $usuario->alias]) }}" role="button">@lang('profile.list')</a>       </div>
@@ -82,7 +97,8 @@
     </div>
     <div class="col-8">
         <div><p>{{ $usuario->about }}</p></div>
-        <div class="infoSerie"><p>@lang('profile.fav')</p>
+        <div class="infoSerietit"><p>@lang('profile.fav')</p>
+            <hr>
 
             <ul>
                 @if($seriesFav != false)
@@ -101,9 +117,14 @@
 
 
         </div>
-        {{ $usuario->idUsu }}
-        <input type="text" id="123" name="idUsu" value="{{ $usuario->idUsu }}" hidden>
+        <hr>
+        <div>
+            <div class="infoSerietit">@lang('profile.stats')</div>
+            <input type="text" id="123" name="idUsu" value="{{ $usuario->idUsu }}" hidden>
+            <p class="text-center" id="nochartjs"></p>
         <canvas id="pieChart"></canvas>
+        </div>
+
 
     </div>
 </div>

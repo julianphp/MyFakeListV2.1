@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Http\Controllers;
+
+
+use App\Models\EmailChange;
+use App\Models\Usuario;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
+
+class EmailNew extends Controller
+{
+    /** Send an email for verify the change of the new email. Check if the new email is in use or not, and create a new entry in the table email_change.
+     * @param Request $req
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
+    public function sendVerification(Request $req){
+        if (Auth::id() == $req->get('idUsu')){
+            $email = $req->get('email');
+
+            $token = Str::random(69);
+            echo $email;
+            if (Usuario::where('email','=',$email)->first()){
+               return redirect()->back()->with('errorEmail',true);
+            } else {
+
+                $newChange = new EmailChange();
+
+
+                $newChange->idUsu = $req->get('idUsu');
+                $newChange->newEmail = $email;
+                $newChange->token = $token;
+                $newChange->created = Carbon::now();
+
+                $newChange->save();
+                if (!ServicioCorreo::sendEmailVerification($email,$token)){
+                    return redirect()->back()->with('errorEmailSend',true);
+                }
+                return redirect()->back()->with('successEmail',$email);
+            }
+
+
+        } else {
+            return response()->view('error404',['user' => Auth::user()]);
+        }
+
+
+    }
+
+    /** Verify the email with the token and update the new email of the users.
+     * @param Request $req
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function verifyEMail(Request $req){
+        $token = $req->token;
+
+        if ($usuReq = EmailChange::where('token','=',$token)->first()) {
+            $dateToken = Carbon::parse($usuReq->created);
+            $dateToken = $dateToken->diffInHours(Carbon::now());
+           if ($usuReq->used != 1 && $dateToken < 1) {
+               try {
+                   $usu = Usuario::find($usuReq->idUsu);
+                   $usu->email = $usuReq->newEmail;
+                   $usu->save();
+                   EmailChange::where('token','=',$token)->update(['used' => 1]);
+               } catch (\Exception $e) {
+                   return view('verifyEmail')->with('error',true);
+               }
+               return view('verifyEmail')->with('success',true);
+
+            } else {
+               return view('verifyEmail')->with('errorToken',true);
+            }
+        } else {
+
+            return view('verifyEmail')->with('errorToken',true);
+        }
+
+
+    }
+}

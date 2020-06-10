@@ -1,4 +1,8 @@
-
+/**
+ * AJAX Request for upload an eps of the anime
+ * @param usu
+ * @param se
+ */
 function subeCa(usu, se) {
     $.ajaxSetup({
         headers: {
@@ -18,6 +22,13 @@ function subeCa(usu, se) {
             $("#cap"+se).html(data);
         })
 }
+
+/**
+ * AJAX Request send the review
+ * @param usu
+ * @param se
+ * @param text
+ */
 function subDes(usu, se, text) {
     $.ajaxSetup({
         headers: {
@@ -37,6 +48,13 @@ function subDes(usu, se, text) {
 
 
 }
+
+/**
+ * AJAX Request, send the score of an anime
+ * @param usu
+ * @param se
+ * @param sc
+ */
 function subeSc(usu, se, sc){
     $.ajaxSetup({
         headers: {
@@ -57,6 +75,13 @@ function subeSc(usu, se, sc){
     })
 
 }
+
+/**
+ * AJAX Request, modal add/del favorite anime of user
+ * @param usu
+ * @param se
+ * @param opeS
+ */
 function modFav(usu, se, opeS){
     $.ajaxSetup({
         headers: {
@@ -85,6 +110,12 @@ function modFav(usu, se, opeS){
 
         })
 }
+
+/**
+ * AJAX Request, Modal delete anime from list
+ * @param usu
+ * @param se
+ */
 function borraSeUsu(usu, se){
     $.ajaxSetup({
         headers: {
@@ -107,13 +138,17 @@ function borraSeUsu(usu, se){
 }
 $(document).ready(function () {
 
-    // para subir un capitulo visto
+    /**
+     * Upload a eps on click
+     */
     $( ".fa-plus-circle" ).click(function() {
         var usu = $(this).data("usu");
         var se = $(this).data("se");
         subeCa(usu, se);
     });
-    // modal para ajustes de una serie
+    /**
+     * Show the modal for edit the entry of the anime user
+     */
     $(".edit").click(function () {
         $("#titulo").text($(this).data('titulo'))
         $("#idSeM").val($(this).data('idse'));
@@ -141,7 +176,9 @@ $(document).ready(function () {
        // $("#"+sts).attr('selected');
         $("#staticBackdrop").modal('show');
     });
-    // para modificar si una serie esta en favoritos  o no.
+    /**
+     * Check if the anime is in favorites or not
+     */
     $(".btnfav").click(function () {
         $(this).hide();
         var ope = $(this).data('opefav');
@@ -153,7 +190,9 @@ $(document).ready(function () {
         modFav(idUsu,idSe,ope);
     });
 
-    //para borrar una serie de la lista
+    /**
+     * Delete the anime from the user list
+     */
     $("#btnd").click(function () {
         var titulo = $("#tit").val();
         var idSe = $("#idSeM").val();
@@ -166,14 +205,18 @@ $(document).ready(function () {
         })
     });
 
-    // para la puntuacion
+    /**
+     * edit the score
+     */
     $(".sco1").click(function () {
         var id = $(this).data("idsc");
         $("#sco1"+id).hide();
         $("#sco"+id).removeAttr("hidden");
 
     });
-    // para la puntuacion
+    /**
+     * edit the score
+     */
     $(".score").focusout(function () {
         var score = $(this).val();
         var usu = $(this).data("usu");
@@ -189,7 +232,10 @@ $(document).ready(function () {
         $("#sco"+id).prop("hidden","e");
         $("#sco1"+id).show();
 
-    }); // para los comentarios de la serie
+    });
+    /**
+     * the review of the anime
+     */
     $(".spanre").click(function () {
         var text1 = $(this).text();
         var id = $(this).data("ids");
@@ -199,6 +245,9 @@ $(document).ready(function () {
         $("#txt"+id).removeAttr("hidden");
 
     });
+    /**
+     * Edit the textbox of the review
+     */
     $(".tex1").focusout( function () {
         var id = $(this).data("idt");
         var text =$(this).val();

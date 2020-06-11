@@ -12,8 +12,8 @@ class estudio extends Seeder
     public function run()
     {
         $data = [
-            "idEst" => 300,
-            "NombreEstudio" => "Silver Link.",
+            "idEst" => 2,
+            "NombreEstudio" => "Kyoto Animation",
 
         ];
         try {

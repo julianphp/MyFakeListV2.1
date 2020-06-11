@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 @section('title')
-    Administracion
+    Administracion de Usuarios - MyFakeList
 @endsection
 @section('head')
     <script src="{{ asset('js/administracion.js') }}"></script>

@@ -28,9 +28,11 @@
                 En esta guia se usara <b>Postman</b> para los ejemplos. Todas las peticiones son devueltas en formato JSON.
             <br>
             <i class="fas fa-long-arrow-alt-right"></i>Para operar es necesario usar un <b> Beareng Token</b>, el cual sera recibido al loguearnos, mediante
-            POST y enviando nuestro <b>email</b> y <b>password</b> a traves del body o bien a traves de <b>authorization</b>en basic Auth, de la siguiente forma a traves de la url !!!IMPORTANTE PONER URL XD:
-                <img class="rounded mx-auto d-block" src="{{ asset('storage/API/auth.png') }}">
+            POST y enviando nuestro <b>email</b> y <b>password</b> a traves del body de la siguiente forma a traves de la url:
+                <img class="rounded mx-auto d-block w-100" src="{{ asset('storage/API/auth.png') }}">
             Si todo esta correcto, recibiremos nuestro Bearer ToKen para poder realizar las peticiones.
+                !! Para hacer login y logout es necesario enviarlo como tipo POST.
+                Para el resto de operaciones con GET.
             Para poder usarlo, al realizar una peticion sera necesario incluir el token en el apartado "Authorization" de Postman y pegarlo en el campo de bearen token.
 
             </ol>

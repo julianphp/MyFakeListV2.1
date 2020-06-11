@@ -32,6 +32,12 @@ return [
     'errorEmail' => 'These email are already in use, try with other email',
     'errorEmailSend' => 'The email cannot be send, try again later or contact with an admin. ',
     'successEmail' => 'The verification email was send successfully to the new address(<b>:EMAIL</b>), you will receive in the next minutes, check all inbox/spam folders',
+    'successMailDelAcc' => 'The emai was send seccessfully to your email, your will receive in the next minutes, check all your inbox/spam folders',
+
+    'deleteAccount' => 'Close Account',
+    'deleteAcc' => 'Request for close your account',
+    'deleteAccInfo' => 'You are to delete your account permanently, this action is irrevocable and you cant recover later. We will send a mail for confirm the close.',
+    'deleteCon' => 'Go man',
 
     'all' => 'All:',
     'completed' => 'Completed',

@@ -18,4 +18,4 @@ mix.webpackConfig({
     },
 });
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/est.sass', 'public/css');
+    .sass('resources/sass/main.sass', 'public/css');

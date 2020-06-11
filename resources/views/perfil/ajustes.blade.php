@@ -46,6 +46,9 @@
                     <button type="button" class="btn btn-primary " id="btnEmail" data-toggle="modal2" data-target="#staticBackdrop1">
                         @lang('profile.email')
                     </button>
+                    <button type="button" class="btn btn-danger" id="btnDelAcc" data-toggle="modal3" data-target="#staticBackdrop3">
+                        @lang('profile.deleteAccount')
+                    </button>
                 </div>
 
                 <div class="modal-footer">
@@ -61,3 +64,4 @@
 @include('perfil.changeEmail')
 
 @include('perfil.changepass')
+@include('perfil.deleteAccount')

@@ -1,5 +1,8 @@
 
 @extends('layouts.plantilla')
+@section('title')
+   Registro - MyFakeList
+@endsection
 @section('head')
     <script src="{{ asset('js/registro.js') }}"></script>
 @endsection

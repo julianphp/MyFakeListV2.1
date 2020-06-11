@@ -31,6 +31,11 @@ return [
     'errorEmail' => 'El correo proporcionado ya esta en uso, intentalo con otro',
     'errorEmailSend' => 'Error al enviar el correo, intentelo de nuevo mas tarde o contacta con un admin, disculpa la molestia',
     'successEmail' => 'El correo de verificacion se ha enviado a la nueva direccion(<b>:EMAIL</b>) en los proximos minutos, recuerde revisar todas las bandejas incluida la de spam',
+    'successMailDelAcc' => 'El correo se ha enviado correctamente, lo recivira en los proximos minutos, recuerda revisar todas las bandejas.',
+    'deleteAccount' => 'Eliminar cuenta',
+    'deleteAcc' => 'Solicitud de cierre de cuenta',
+    'deleteAccInfo' => 'Estas seguro de querer borrar tu cuenta? esta accion es irreversible y no podras recuperarla mas tarde, te sera enviado un correo para confirmar el cierre',
+    'deleteCon' => 'Adelante mi pana',
 
     'all' => 'Total:',
     'completed' => 'Completados:',

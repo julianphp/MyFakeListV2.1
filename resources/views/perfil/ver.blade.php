@@ -13,43 +13,7 @@
     <div class="alert alert-primary" role="alert">
         @lang('profile.profile',['name' => $usuario->alias])
     </div>
-    @if (session('errorPhoto'))
-        <div class="alert alert-danger">
-            @lang('profile.edit.photoError')
-        </div>
-    @endif
-    @if (session('errorEmail'))
-        <div class="alert alert-danger">
-           @lang('profile.errorEmail')
-        </div>
-    @endif
-    @if (session('errorEmailSend'))
-        <div class="alert alert-danger">
-           @lang('profile.errorEmailSend')
-        </div>
-    @endif
-    @if (session('successEmail'))
-        <div class="alert alert-info">
-           @lang('profile.successEmail',['email' => session('successEmail')])
-        </div>
-    @endif
-    @if (session('successPhoto') == true)
-        <div class="alert alert-info">
-            @lang('profile.successPhoto')
-        </div>
-    @endif
-
-
-            @if(session('pass') == 'ok')
-                <div class="alert alert-info">
-                @lang('profile.successPass')
-                </div>
-                @endif
-            @if(session('pass') == 'no')
-                <div class="alert alert-danger">
-                @lang('profile.successError')
-                </div>
-            @endif
+    @include('perfil.messages')
 
 
 <div class="row">
@@ -68,7 +32,7 @@
             <li><b>@lang('profile.member')</b>   {{ \Carbon\Carbon::parse($usuario->created_at)->format('d-m-Y') }} </li>
 
             <hr>
-               <p class="infoSerietit">Estadisticas de Anime</p>
+               <p class="infoSerietit">@lang('profile.stats')</p>
 
             <li><b>@lang('profile.all')</b>  <span id="all"></span></li>
             <li><b>@lang('profile.watch')</b>   <span id="viendo"></span> </li>

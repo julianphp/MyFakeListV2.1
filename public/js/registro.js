@@ -62,10 +62,11 @@ $(document).ready(function () {
              hidden = false;
         } else {
             if (hidden1 === true) {
-                $(".passreq").prop("hidden","e");
+
                 $("#env").removeAttr("disabled");
 
             }
+            $(".passreq").prop("hidden","e");
             hidden = true;
 
         }

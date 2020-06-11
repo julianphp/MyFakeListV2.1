@@ -25,6 +25,8 @@ class CreateUsuarioTable extends Migration
             $table->rememberToken();
             $table->integer('is_admin')->nullable();
             $table->softDeletes();
+            $table->string('token_delete_account',69)->nullable();
+            $table->timestamp('token_delete_account_date')->nullable();
         });
     }
 

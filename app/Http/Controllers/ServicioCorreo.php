@@ -91,5 +91,25 @@ class ServicioCorreo extends Mailable
             return false;
         }
     }
+    public static function sendDeleteAccountVerification($email,$token){
+        if (App::getLocale() == "en"){
+            $subject = "Your link for delete your account :( - MyFakeList";
+        } else {
+            $subject = "Este es el ultimo paso para elimitar tu cuneta :( - MyFake List";
+        }
+
+        $for = $email;
+        $token = ['token' => $token];
+        try {
+            Mail::send('email.deleteAccount',$token, static function($msj) use($subject,$for){
+                $msj->from("myfakelist@kumiko.es","MyFakeList");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+            return true;
+        } catch (\Exception $e){
+            return false;
+        }
+    }
 
 }

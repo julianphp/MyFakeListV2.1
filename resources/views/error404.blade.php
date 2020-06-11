@@ -1,7 +1,7 @@
 
 @extends('layouts.plantilla')
 @section('title')
-    Inicio - MyFakeList
+    Error 404 - MyFakeList
 @endsection
 @section('content')
 

@@ -20,7 +20,7 @@ class serie extends Seeder
                 "verify_peer_name"=>false,
             ),
         );
-        $datosEstudio = 300;
+        $datosEstudio = 2;
       //fixme  $productor = file_get_contents("https://api.jikan.moe/v3/producer/$datosEstudio/1", false, stream_context_create($arrContextOptions));
         $productor = file_get_contents("http://localhost:9000/public/v3/producer/$datosEstudio/1", false, stream_context_create($arrContextOptions));
 

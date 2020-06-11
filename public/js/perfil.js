@@ -14,6 +14,10 @@ $(document).ready(function () {
 
         $(".modal2").modal();
     });
+    $("#btnDelAcc").click(function () {
+
+        $(".modal3").modal();
+    });
     /**
      * Get the name of the file for upload an avatar
      */

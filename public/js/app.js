@@ -50931,10 +50931,10 @@ if (typeof window !== 'undefined' && typeof window.Ziggy !== 'undefined') {
 
 /***/ }),
 
-/***/ "./resources/sass/est.sass":
-/*!*********************************!*\
-  !*** ./resources/sass/est.sass ***!
-  \*********************************/
+/***/ "./resources/sass/main.sass":
+/*!**********************************!*\
+  !*** ./resources/sass/main.sass ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -51198,7 +51198,7 @@ var Router = /*#__PURE__*/function (_String) {
       })[0];
 
       if (name) {
-        var pattern = new RegExp('^' + name.replace('*', '.*').replace('.', '.') + '$', 'i');
+        var pattern = new RegExp('^' + name.replace('.', '\\.').replace('*', '.*') + '$', 'i');
         return pattern.test(currentRoute);
       }
 
@@ -51265,14 +51265,14 @@ function route(name, params, absolute, customZiggy) {
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/est.sass ***!
-  \*************************************************************/
+/*!**************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/main.sass ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\Users\julia\PhpstormProjects\mal\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\julia\PhpstormProjects\mal\resources\sass\est.sass */"./resources/sass/est.sass");
+module.exports = __webpack_require__(/*! C:\Users\julia\PhpstormProjects\mal\resources\sass\main.sass */"./resources/sass/main.sass");
 
 
 /***/ })

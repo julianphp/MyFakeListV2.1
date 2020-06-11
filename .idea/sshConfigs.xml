@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig host="161.35.206.8" id="96458ae9-cd7f-450b-a26d-c7f39dbe4bda" keyPath="C:\Users\julia\.ssh\id_rsa" port="22" nameFormat="DESCRIPTIVE" username="root" />
+      <sshConfig host="kumiko.es" id="96458ae9-cd7f-450b-a26d-c7f39dbe4bda" keyPath="C:\Users\julia\.ssh\id_rsa" port="22" nameFormat="DESCRIPTIVE" username="root" />
     </configs>
   </component>
 </project>

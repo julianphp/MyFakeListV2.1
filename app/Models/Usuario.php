@@ -21,7 +21,7 @@ class Usuario extends Authenticatable
 
 
     protected $hidden = [
-        'email','updated_at','password', 'remember_token','is_admin'
+        'email','updated_at','password', 'remember_token','is_admin','token_delete_account'
     ];
 
     /** Scope seach for ususuario

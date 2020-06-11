@@ -69,6 +69,8 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
             //Route::post('editInfoUsu', 'UsuarioController@editInfoUsu')->name('editInfoUsu');
             Route::post('infousua', 'UsuarioController@editInfoUsu')->name('perfil.infousua');
             Route::post('password', 'UsuarioController@password')->name('perfil.password');
+            Route::post('delete','UserDelete@sendDeleteCon')->name('perfil.delete');
+            Route::match(['get','post'],'delete/{token}','UserDelete@deleteAccount')->name('perfil.delConfirm');
 
         // Route::match(['get','post'],'ver', 'UsuarioController@verPerfil')->name('ver');
     });

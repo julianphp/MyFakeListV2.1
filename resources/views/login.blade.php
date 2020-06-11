@@ -1,4 +1,7 @@
 @extends('layouts.plantilla')
+@section('title')
+   Login - MyFakeList
+@endsection
 @section('content')
 
     @if($error == true)

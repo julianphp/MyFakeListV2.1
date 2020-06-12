@@ -3,6 +3,7 @@
 ## ¿Que es MyFakeList?
 El proyecto [MyFakeList](https://myfakelist.kumiko.es) es una web en la cual podras ver y realizar un seguimiento sobre series de anime. El usuario podra consultar informacion sobre series y añadirlas a su lista de seguimiento para llevar un control sobre lo que esta viendo el usuario. MyFakeList esta disponible online desde aqui https://myfakelist.kumiko.es.
 
+[Enlace](https://youtu.be/c2wqfBmY6sc) al video de presentacion.
 ## Tecnologias Usadas
 
  - PHP 7.4

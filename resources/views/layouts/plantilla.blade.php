@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>@yield('title') </title>
-    <link rel="icon" href="./css/favicon.png" type="image/png">
+    <link rel="icon" href="{{ asset('storage/favicon.ico') }}" type="image/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script
@@ -16,7 +16,7 @@
     <meta name="description" content= "La mejor pagina de seguimiento de anime" />
     <meta property="og:title" content="Tu nueva web de seguimiento de anime." />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://dekomoridesu.com/test/mal/inicio" />
+    <meta property="og:url" content="myfakelist.kumiko.es" />
     <meta property="og:image" content="https://i.imgur.com/1nViyok.jpg" />
     <meta property="og:site_name" content="My Fake List" />
     <script type="text/javascript">

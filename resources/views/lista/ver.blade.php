@@ -44,7 +44,7 @@
             <td> <img class="w-25" src="{{ $ser->img }}"> </td>
             <td> <a href={{ route('serie.ver',['idSe'=> $ser->idSe,'titulo'=>$ser->titulo]) }} > {{ $ser->titulo  }}</a>  </td>
             <td>{{ $ser->score == NULL ? "-" : $ser->score}} </td>
-            <td>{{ $ser->titpo }} </td>
+            <td>{{ $ser->tipo }} </td>
 
             @if( $ser->status == "Completada")
 

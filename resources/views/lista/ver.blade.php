@@ -50,7 +50,7 @@
 
             <td> {{ $ser->capitulo }}  </td>
             @else
-            <td>{{ $ser->capitulo }} / {{ $ser->capitulo }} </td>
+            <td>{{ $ser->capitulo }} / {{ $ser->episodios }} </td>
             @endif
               <td>  {{$ser->review == "" ? "---" : $ser->review }}   </td>
         </tr>

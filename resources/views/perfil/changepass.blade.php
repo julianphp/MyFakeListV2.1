@@ -14,14 +14,14 @@
                         @csrf
                         <input type="hidden" name="idUsu" value="{{ $user->idUsu }}" >
                         <label for="pass">@lang('profile.pass1')</label>
-                        <input type="password" class="form-control pass" id="pass" name="pass"  maxlength="50">
+                        <input type="password" class="form-control pass" id="pass" name="pass"  maxlength="50" required>
                         <button type="button" class="btn btn-danger passreq" hidden>@lang('messages.register.passV')</button>
 
                     </div>
                     <div class="form-group">
                         @csrf
                         <label for="pass1">@lang('profile.pass2')</label>
-                        <input type="password" class="form-control passcon" id="pass1" name="pass1"  maxlength="50">
+                        <input type="password" class="form-control passcon" id="pass1" name="pass1"  maxlength="50" required>
                         <button type="button" class="btn btn-danger passfail" hidden>@lang('messages.register.passC')</button>
                     </div>
 

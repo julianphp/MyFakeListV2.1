@@ -15,7 +15,7 @@
                         @csrf
                         <input type="hidden" name="idUsu" value="{{ $user->idUsu }}" >
                         <label for="email">@lang('profile.changeEmail1')</label>
-                        <input type="email" class="form-control email" id="email" name="email" >
+                        <input type="email" class="form-control email" id="email" name="email" required >
 
 
                     </div>

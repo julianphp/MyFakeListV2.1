@@ -26,7 +26,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">@lang('resetPassword.email').</label>
-                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                 </div>
                 <button type="submit" class="btn btn-primary">@lang('signup.send')</button>
             </form>

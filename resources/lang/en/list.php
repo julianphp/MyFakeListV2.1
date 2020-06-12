@@ -16,5 +16,6 @@ return [
     'fecSts' => 'Date Start:',
     'fecEnd' => 'Date Finish:',
     'update' => 'Updating',
-    'fecEndUs' => 'Not finished yet.'
+    'fecEndUs' => 'Not finished yet.',
+    'edit' => 'Edit'
 ];

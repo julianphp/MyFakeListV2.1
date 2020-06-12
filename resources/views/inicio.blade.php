@@ -5,6 +5,11 @@
 @endsection
 @section('content')
 <br>
+@if(session('success'))
+    <div class="alert alert-success" role="alert">
+        @lang('messages.successLogout')
+    </div>
+@endif
 <div id="app">
     <espacio></espacio>
 </div>

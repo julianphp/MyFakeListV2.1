@@ -24,6 +24,7 @@ return [
     'romance' => "Animes de Romance:",
     'sol' => "Animes de Slice Of Life:",
     'lasrtuserregistrer' => "Ultimos Usuarios registrados:",
+    'successLogout' => 'Sesion Cerrada Correctamente'
 
 
 

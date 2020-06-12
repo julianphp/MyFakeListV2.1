@@ -53,7 +53,7 @@ class SesionController extends Controller
     public function logout(){
         if (Auth::check()){
             Auth::logout();
-            return redirect()->intended('inicio');
+            return redirect()->intended('inicio')->with('success',true);
         }
         return redirect()->intended('inicio');
 

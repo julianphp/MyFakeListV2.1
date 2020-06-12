@@ -27,7 +27,7 @@
             <th scope="col">@lang('list.img')</th>
             <th scope="col">@lang('list.title')</th>
             <th scope="col">@lang('list.score')</th>
-            <th scope="col">@lang('list.score')</th>
+            <th scope="col">@lang('list.type')</th>
             <th scope="col">@lang('list.progress')</th>
             <th scope="col">@lang('list.comment')</th>
         </tr>
@@ -65,7 +65,7 @@
                         data-idse="{{$ser->idSe}}" data-titulo="{{$ser->titulo}}" data-sts="{{$ser->status}}"
                            data-fav="{{$ser->favorita}}" data-cap="{{$ser->capitulo}}" data-ini="{{$ser->fec_add}}" data-fin="{{$ser->fec_end}}"
                            data-rev="{{$ser->review}}"
-                        >Edit</a> </p>  </td>
+                        >@lang('list.edit')</a> </p>  </td>
                 <td> <a href="{{ route('serie.ver',['idSe'=> $ser->idSe,'titulo'=>$ser->titulo]) }}" > {{ $ser->titulo }} </a>  </td>
                 <td>
                     <span class="sco1" id="sco1{{$loop->iteration}}" data-idsc="{{$loop->iteration}}">{{ $ser->score == NULL ? "-" : $ser->score}}  </span>

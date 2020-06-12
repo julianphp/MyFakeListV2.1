@@ -22,6 +22,7 @@ return [
     'romance' => "Romance Anime:",
     'sol' => "Slice Of Life Anime:",
     'lasrtuserregistrer' => "Last Users Registrer:",
+    'successLogout' => 'Session Closed correct'
 
 
 ];

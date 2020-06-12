@@ -30,9 +30,11 @@ Ademas es importante destacar, que todo lo relacionado con el envio de correos n
  6. Generamos las keys necesarias para laravel __`php artisan key:generate`__ 
  7. Creamos el enlace simbolico para poder acceder a las imagenes correctamente `php artisan storage:link`
 ### Otros ajustes para su correcto funcionamiento
-Es altamente recomendable cambiar el APP_URL en el .env con la ruta local de donde esta despleguado el proyecto, includio el public, ya que puede ocasionar problemas de enrutamiento en algunos enlaces. Se adjunta un .htaccess en el cual remove el /public de la url, por lo que no es necesario ponerlo a la hora de navegar, pero si en el APP_URL.
+Es altamente recomendable cambiar el APP_URL en el .env con la ruta local de donde esta despleguado el proyecto, includio el public, ya que puede ocasionar problemas de enrutamiento en algunos enlaces. 
+Se adjunta un .htaccess en el cual remove el /public de la url, por lo que no es necesario ponerlo a la hora de navegar, pero si en el APP_URL.
 Se adjunta ademas el archivo __mal.sql__ el cual contiene directamente toda la BD creada y poblada. En caso de importarla, es __necesario__ reinstalar las keys de passport para poder hacer uso de la API.`php artisan passport:install --force`
-__Importante:__ Para poder visualizar la parte de administrador, sera necesario colocar un valor 1 en la BD en la tabla de `usuario` en el campo __is_admin__. Desde el perfil de usuario se mostrara un boton para gestionar los usuarios.
+__Importante:__ Para poder visualizar la parte de administrador, sera necesario colocar un valor 1 en la BD en la tabla de `usuario` en el campo __is_admin__. 
+Desde el perfil de usuario se mostrara un boton para gestionar los usuarios.
 
 
 ### Migraciones y Seeds

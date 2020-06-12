@@ -45,8 +45,7 @@ Tras esto, es necesario cambiar el ID del estudio en la variable __$datosEstudio
 
 
 ## Esquema de la BD
-
-PONER UNA FOTO
+![Esquema](https://i.imgur.com/A3mwJhV.jpg)
 
 ## Uso de la API
 MyFakeList proporciona una API para los usuarios registrados. Las instrucciones de uso estan redactadas en:

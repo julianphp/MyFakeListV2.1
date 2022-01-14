@@ -35,8 +35,7 @@ Route::prefix('series')->group(function (){
 
 
 Route::prefix('usuario')->group(function (){
-    Route::get('get/{id}','api\UsuarioController@find')->middleware('auth:api');
-    Route::post('{id}','api\UsuarioController@find')->middleware('auth:api');
+    Route::get('{id}','api\UsuarioController@find')->middleware('auth:api');
     Route::get('nick/{id}','api\UsuarioController@usuario')->middleware('auth:api');
 });
 

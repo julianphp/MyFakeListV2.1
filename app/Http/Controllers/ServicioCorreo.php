@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Session;
@@ -34,7 +35,7 @@ class ServicioCorreo extends Mailable
     public function build()
     {
         return $this->view("correo")
-            ->from("kumiko@kumiko.es")
+            ->from("myfakelist@kumiko.es")
             ->subject("Bienvenida a mi sitio");
     }
 
@@ -60,7 +61,7 @@ class ServicioCorreo extends Mailable
             });
             return true;
         } catch (\Exception $e){
-            return false;
+	    return false;
         }
 
        // return redirect()->back();
@@ -95,7 +96,7 @@ class ServicioCorreo extends Mailable
         if (App::getLocale() == "en"){
             $subject = "Your link for delete your account :( - MyFakeList";
         } else {
-            $subject = "Este es el ultimo paso para elimitar tu cuneta :( - MyFake List";
+            $subject = "Este es el ultimo paso para eliminar tu cuneta :( - MyFake List";
         }
 
         $for = $email;
@@ -111,5 +112,6 @@ class ServicioCorreo extends Mailable
             return false;
         }
     }
+
 
 }

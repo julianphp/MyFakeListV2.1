@@ -8,6 +8,7 @@ use App\Models\UsuSerie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ListaController extends Controller
 {
@@ -64,39 +65,59 @@ class ListaController extends Controller
         }
     }
 
+    public function capTest(Request $request){
+        $data = $request->all();
+        \Log::channel('daily')->info(print_r($data,true));
+        return response()->json(['error' => false]);
+    }
+
     /** Change the episode view of the user
      * @param Request $req
-     * @return int
+     * @return \Illuminate\Http\JsonResponse
      */
     public function capitulo(Request $req){
-        if ($req->ajax()){
-            if ($req->get('usu')== Auth::id() ){
-            $serieUsu = UsuSerie::join('serie','ususer.idSe', '=','serie.idSe')
-                        ->where('ususer.idUsu',$req->get('usu'))
-                        ->where('ususer.idSe',$req->get('se'))->get();
-            $capAct = $serieUsu[0]->capitulo;
-             if ($capAct < $serieUsu[0]->episodios){
-                 if ($serieUsu[0]->status != "Viendo") {
-                     UsuSerie::usuario($req->get('usu'))
-                         ->serie($req->get('se'))
-                         ->update(['status' => 'Viendo']);
-                 }
-                 if (($capAct + 1) == $serieUsu[0]->episodios){
-                     UsuSerie::usuario($req->get('usu'))
-                         ->serie($req->get('se'))
-                         ->update(['fec_end' => Carbon::now(),'status' => 'Completada']);
-                 }
+       // if ($req->ajax()){ FIXME check this
+        \Log::channel('daily')->info('entrooooo');
+        try {
+            if ((int)$req->get('usu') === Auth::id() ){
+                $serieUsu = UsuSerie::join('serie','ususer.idSe', '=','serie.idSe')
+                    ->where('ususer.idUsu',$req->get('usu'))
+                    ->where('ususer.idSe',$req->get('ser'))->get();
+                $capAct = $serieUsu[0]->capitulo;
+                if ($capAct < $serieUsu[0]->episodios){
+                    if ($serieUsu[0]->status !== "Viendo") {
+                        UsuSerie::usuario($req->get('usu'))
+                            ->serie($req->get('ser'))
+                            ->update(['status' => 'Viendo']);
+                    }
+                    if (($capAct + 1) == $serieUsu[0]->episodios){
+                        UsuSerie::usuario($req->get('usu'))
+                            ->serie($req->get('ser'))
+                            ->update(['fec_end' => Carbon::now(),'status' => 'Completada']);
+                    }
                     UsuSerie::usuario($req->get('usu'))
-                        ->serie($req->get('se'))
+                        ->serie($req->get('ser'))
                         ->update(['capitulo' => $capAct +1]);
-                    return $capAct + 1;
+                    return response()->json([
+                        'error' => false,
+                        'cap' => $capAct + 1
+                    ]);
                 } else {
-                 return $capAct;
-             }
-
+                    return response()->json([
+                        'error' => false,
+                        'cap' => $capAct
+                    ]);
+                }
 
             }
+        } catch (\Exception $e){
+            Log::channel('daily')->debug($e);
+            return response()->json([
+                'error' => true,
+            ]);
         }
+
+       // }
     }
 
     /** Change the review of the anime that have the user

@@ -7,7 +7,8 @@ return [
     'register' => 'Registrate aqui!',
     'list' => 'Lista Anime',
     'closeSesion' => 'Cerrar Sesion',
-
+    'meta_title' => 'La mejor pagina de seguimiento de anime.',
+    'meta_description' => 'Tu nueva web de seguimiento de anime.',
 
 
 

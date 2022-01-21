@@ -1,10 +1,9 @@
 @extends('layouts.plantilla')
 @section('title')
-    Lista de {{ $aliasUsu->alias }}
+    @lang('list.list_title', ['name' => $aliasUsu->alias])
 @endsection
 @section('head')
-    <script src="https://kit.fontawesome.com/b873749123.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/lista.js') }}"></script>
+
 @endsection
 
 
@@ -16,7 +15,7 @@
 
     </div>
     <br>
-    @if($lista == false)
+    @if($lista === false)
         <p>@lang('list.listNo')</p>
     @else
 
@@ -35,7 +34,7 @@
         <tbody>
 
 
-        @if( $user == false || $user->idUsu != $lista[0]->idUsu)
+        @if( $user === false || $user->idUsu != $lista[0]->idUsu)
 
             @foreach($lista as $ser)
 
@@ -46,7 +45,7 @@
             <td>{{ $ser->score == NULL ? "-" : $ser->score}} </td>
             <td>{{ $ser->tipo }} </td>
 
-            @if( $ser->status == "Completada")
+            @if( $ser->status === "Completada")
 
             <td> {{ $ser->capitulo }}  </td>
             @else
@@ -79,7 +78,7 @@
                     </div>
                 </td>
                 <td> {{ $ser->tipo }}</td>
-                @if($ser->status == "Completada")
+                @if($ser->status === "Completada")
                     <td><span id="cap{{ $ser->idSe }}"> {{  $ser->episodios  }}  </td>
                 @else
                     <td><span id="cap{{ $ser->idSe }}"> {{ $ser->capitulo }}  </span> / {{$ser->episodios}} <i class="fas fa-plus-circle" data-se="{{ $ser->idSe }}" data-usu="{{ $ser->idUsu }}"></i></td>
@@ -103,5 +102,64 @@
     @endif
 
 @endsection
+@section('footer-script')
+    <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
+    <script src="{{ asset('js/lista.js') }}"></script>
+    <script>
+        window.addEventListener('load', function () {
+
+            let addCap = document.querySelectorAll('.fa-plus-circle');
+
+            addCap.forEach( item => {
+                item.addEventListener('click', function (e){
+                    console.log(e.target.dataset.usu);
+                    console.log(e.target.dataset.se);
+                    capTest(e.target.dataset.usu,e.target.dataset.se + 132).then( data => {
+                        console.log(data);
+                        if (!data.error){
+                            document.getElementById('cap' + e.target.dataset.se).innerText = data.cap;
+                        } else {
+                            alert('algo salio mal >(');
+                        }
+                    })
+                })
+            })
 
 
+        }, false);
+    </script>
+    <script>
+        async function capTest(usu, ser){
+            /* TODO probar esto
+           fetch(APP_URL + '/lista/capTest/',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            }).then(data => response.json())
+            .then(data => console.log(data));
+            */
+
+            const response = await fetch(APP_URL + '/lista/cap',{
+                method: 'POST',
+                body: JSON.stringify({
+                    'usu': usu,
+                    'ser': ser,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            });
+            if (!response.ok){
+                console.log('noit oke');
+                return false;
+            }
+            return response.json();
+
+
+        }
+    </script>
+
+@endsection

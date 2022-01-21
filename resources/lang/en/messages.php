@@ -7,6 +7,9 @@ return [
     'register' => 'Sign-Up Here!',
     'list' => 'List Anime',
     'closeSesion' => 'Close Sesion',
+    'meta_title' => 'The best webpage to follow anime status.',
+    'meta_description' => 'Your new web to follow anime.',
+
 
     'profile' => 'Profile',
     'save' => 'Save changes',

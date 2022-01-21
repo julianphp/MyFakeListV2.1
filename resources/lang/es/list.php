@@ -1,5 +1,6 @@
 <?php
 return [
+    'list_title' => 'Lista de :name',
     'list' => 'Lista de <b>:NAME</b>',
     'listNo' => 'No tiene ningun anime en su lista todavia :(',
     'img' => 'Portada',

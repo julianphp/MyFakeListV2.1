@@ -81,6 +81,7 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
            //Operaciones de la lista
            Route::post('score', 'ListaController@score');
            Route::post('cap', 'ListaController@capitulo');
+           Route::post('capTest', 'ListaController@capTest');
            Route::post('review', 'ListaController@review');
     });
 

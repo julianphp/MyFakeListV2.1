@@ -144,7 +144,7 @@ $(document).ready(function () {
     $( ".fa-plus-circle" ).click(function() {
         var usu = $(this).data("usu");
         var se = $(this).data("se");
-        subeCa(usu, se);
+       // subeCa(usu, se);
     });
     /**
      * Show the modal for edit the entry of the anime user

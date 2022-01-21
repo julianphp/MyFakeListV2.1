@@ -1,6 +1,7 @@
 <?php
 return [
-  'list' => 'List of <b>:NAME</b>',
+    'list_title' => 'List of :name',
+    'list' => 'List of <b>:NAME</b>',
     'listNo' => 'Dont have any anime in their list yet :(',
     'img' => 'Image',
     'title' => 'Title',

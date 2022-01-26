@@ -104,4 +104,4 @@ El formulario de registro contiene diversas avisos y para comprobar que la contr
 ## Esquema de la BD
 ![Esquema](https://i.imgur.com/A3mwJhV.jpg)
 
-
+##Test

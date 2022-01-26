@@ -106,4 +106,6 @@ El formulario de registro contiene diversas avisos y para comprobar que la contr
 
 ##Test
 Aqui he tocado algo
-toco en la rama master
+Estoy en la rama branch-test.
+Final en bt.
+Otro mas en bt.

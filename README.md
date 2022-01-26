@@ -105,7 +105,10 @@ El formulario de registro contiene diversas avisos y para comprobar que la contr
 ![Esquema](https://i.imgur.com/A3mwJhV.jpg)
 
 ##Test
-Aqui he tocado algo
+Aqui he tocado algo.
+
 Estoy en la rama branch-test.
+
 Final en bt.
+
 Otro mas en bt.

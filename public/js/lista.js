@@ -1,4 +1,5 @@
 /**
+ * NOT IN USE.
  * AJAX Request for upload an eps of the anime
  * @param usu
  * @param se
@@ -139,6 +140,7 @@ function borraSeUsu(usu, se){
 $(document).ready(function () {
 
     /**
+     * NOT IN USE.
      * Upload a eps on click
      */
     $( ".fa-plus-circle" ).click(function() {
@@ -236,7 +238,8 @@ $(document).ready(function () {
     /**
      * the review of the anime
      */
-    $(".spanre").click(function () {
+    /*
+    $(".spanCommentUser").click(function () {
         var text1 = $(this).text();
         var id = $(this).data("ids");
         $("#s"+id).hide();
@@ -248,6 +251,7 @@ $(document).ready(function () {
     /**
      * Edit the textbox of the review
      */
+    /*
     $(".tex1").focusout( function () {
         var id = $(this).data("idt");
         var text =$(this).val();
@@ -263,6 +267,8 @@ $(document).ready(function () {
         }
 
     });
+
+     */
 
 
 });

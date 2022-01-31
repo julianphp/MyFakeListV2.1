@@ -123,14 +123,20 @@ class ListaController extends Controller
     /** Change the review of the anime that have the user
      * @param Request $req
      */
-    public function review(Request $req){
-        if ($req->ajax()){
-            if (Auth::id() == $req->get('usu')) {
-                $serie = $req->get('se');
-                $txt = $req->get('text');
-                $this->updateReview($serie, $txt);
-            }
+    public function review(Request $req) : \Illuminate\Http\JsonResponse
+    {
+        if (Auth::id() === (int)$req->get('usu')) {
+            $serie = $req->get('ser');
+            $txt = $req->get('text');
+            $this->updateReview($serie, $txt);
+
+            return response()->json([
+                'error' => false
+            ]);
         }
+        return response()->json([
+            'error' => true,
+        ]);
     }
 
     /** Add a new anime to the list of the user.

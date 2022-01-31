@@ -104,19 +104,3 @@ El formulario de registro contiene diversas avisos y para comprobar que la contr
 ## Esquema de la BD
 ![Esquema](https://i.imgur.com/A3mwJhV.jpg)
 
-##Test
-Aqui he tocado algo.
-
-Estoy en la rama branch-test.
-
-Final en bt.
-
-Otro mas en bt.
-coomit 1
-
-coomit 2
-
-coomit 3
-
-coomit 4
-

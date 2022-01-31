@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Laminas\Diactoros\Response\JsonResponse;
 
 class ListaController extends Controller
 {
@@ -57,20 +58,30 @@ class ListaController extends Controller
     /** Change the score of the anime
      * @param Request $req
      */
-    public function score(Request $req){
-        if ($req->ajax()){
-            if ($req->get('usu') == Auth::id())
-            UsuSerie::usuario($req->get('usu'))
-                ->serie($req->get('se'))
-                ->update(['score' => $req->get('sc')]);
+    public function score(Request $req) : \Illuminate\Http\JsonResponse
+    {
+        if ($req->get('usu') == Auth::id()){
+            try {
+                UsuSerie::usuario($req->get('usu'))
+                    ->serie($req->get('ser'))
+                    ->update(['score' => $req->get('sc')]);
+
+                return response()->json([
+                    'error' => false,
+                ]);
+            } catch (\Exception $e){
+                Log::channel('daily')->debug($e);
+                return response()->json([
+                    'error' => true,
+                ]);
+            }
+
         }
+        return response()->json([
+            'error' => true,
+        ]);
     }
 
-    public function capTest(Request $request){
-        $data = $request->all();
-        \Log::channel('daily')->info(print_r($data,true));
-        return response()->json(['error' => false]);
-    }
 
     /** Change the episode view of the user
      * @param Request $req

@@ -210,12 +210,15 @@ $(document).ready(function () {
     /**
      * edit the score
      */
+    /*
     $(".sco1").click(function () {
         var id = $(this).data("idsc");
         $("#sco1"+id).hide();
         $("#sco"+id).removeAttr("hidden");
 
     });
+
+     */
     /**
      * edit the score
      */

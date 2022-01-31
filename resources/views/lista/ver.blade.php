@@ -70,9 +70,9 @@
                 </td>
                 <td class="align-middle"> <a href="{{ route('serie.ver',['idSe'=> $ser->idSe,'titulo'=>$ser->titulo]) }}" > {{ $ser->titulo }} </a>  </td>
                 <td class="align-middle">
-                    <span class="sco1" id="sco1{{$loop->iteration}}" data-idsc="{{$loop->iteration}}">{{ $ser->score == NULL ? "-" : $ser->score}}  </span>
-                    <div class="form-group sco" hidden id="sco{{$loop->iteration}}" >
-                        <select class="form-control score"  data-idscore="{{$loop->iteration}}" data-se="{{ $ser->idSe }}" data-usu="{{ $ser->idUsu }}">
+                    <span class="spanScoreUser" id="sco1{{$loop->iteration}}" data-idsc="{{$loop->iteration}}">{{ $ser->score == NULL ? "-" : $ser->score}}  </span>
+                    <div class="form-group selectScoreUser" hidden id="selectScoreUser-{{$loop->iteration}}" >
+                        <select class="form-control score"  data-idscore="{{$loop->iteration}}" data-ser="{{ $ser->idSe }}" data-usu="{{ $ser->idUsu }}">
                                 <option>-</option>
                             @for($x=0; $x<=10;$x++)
                                 <option>{{$x}}</option>
@@ -133,7 +133,6 @@
             let editCommentUser = document.querySelectorAll('.spanCommentUser');
             editCommentUser.forEach(item => {
                item.addEventListener('click', function (e){
-                   console.log(e.target.innerText,e.target.dataset.idrow );
                    let textarea = document.getElementById('textareaCommentUser-' + e.target.dataset.idrow);
                    textarea.value = e.target.innerText;
                    textarea.hidden = false;
@@ -153,7 +152,6 @@
                        'text': e.target.value,
                    }).then( data => {
                        if( data.error){
-                           console.error(data.msg);
                            if(data.msg){
                                let textmsg = '';
                                 for( let x in data.msg){
@@ -171,7 +169,31 @@
                        }
                    });
                 });
-            })
+            });
+
+            let chooseScore = document.querySelectorAll('.spanScoreUser');
+            chooseScore.forEach(item => {
+               item.addEventListener('click', function (e) {
+                   e.target.hidden = true;
+                   document.getElementById('selectScoreUser-' + e.target.dataset.idsc).hidden = false;
+               });
+            });
+
+            let uploadScore = document.querySelectorAll('.selectScoreUser');
+            uploadScore.forEach(item => {
+               item.addEventListener('change', function (e){
+                   console.log(e.target.value);
+                   sendRequest('/lista/score',{
+                       'usu': e.target.dataset.usu,
+                       'ser': e.target.dataset.ser,
+                       'sc': e.target.value
+                   }).then(data => {
+                        if (data.error){
+                            alert(lang[language].error_generic)
+                        }
+                   });
+               });
+            });
 
         }, false);
     </script>

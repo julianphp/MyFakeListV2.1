@@ -105,6 +105,7 @@
 @section('footer-script')
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
     <script src="{{ asset('js/lista.js') }}"></script>
+    <script src="{{ asset('js/language/list/lang.js') }}"></script>
     <script>
         window.addEventListener('load', function () {
 
@@ -112,54 +113,19 @@
 
             addCap.forEach( item => {
                 item.addEventListener('click', function (e){
-                    console.log(e.target.dataset.usu);
-                    console.log(e.target.dataset.se);
-                    capTest(e.target.dataset.usu,e.target.dataset.se + 132).then( data => {
-                        console.log(data);
+                    sendRequest('/lista/cap',{
+                        'usu': e.target.dataset.usu,
+                        'ser': e.target.dataset.se
+                    }).then( data => {
                         if (!data.error){
                             document.getElementById('cap' + e.target.dataset.se).innerText = data.cap;
                         } else {
-                            alert('algo salio mal >(');
+                            alert(lang[language].error_generic);
                         }
-                    })
+                    });
                 })
             })
-
-
         }, false);
-    </script>
-    <script>
-        async function capTest(usu, ser){
-            /* TODO probar esto
-           fetch(APP_URL + '/lista/capTest/',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-            }).then(data => response.json())
-            .then(data => console.log(data));
-            */
-
-            const response = await fetch(APP_URL + '/lista/cap',{
-                method: 'POST',
-                body: JSON.stringify({
-                    'usu': usu,
-                    'ser': ser,
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-            });
-            if (!response.ok){
-                console.log('noit oke');
-                return false;
-            }
-            return response.json();
-
-
-        }
     </script>
 
 @endsection

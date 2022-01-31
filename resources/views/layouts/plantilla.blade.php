@@ -29,7 +29,7 @@
     <meta property="twitter:site_name" content="My Fake List" />
 
     <script type="text/javascript">
-        var APP_URL = {!! json_encode(url('/')) !!}
+        const APP_URL = {!! json_encode(url('/')) !!};
     </script>
     @yield('head')
 </head>
@@ -48,6 +48,10 @@
     @yield('content')
 </div>
 
+<script>
+    const language = '{{ App::getLocale() }}';
+</script>
+<script src="{{ asset('js/globalFunctions/sendRequest.js') }}"></script>
 <script src="{{ asset('js/librarys/popper-1-16.js') }}"></script>
 <script src="{{ asset('js/librarys/bootstrap4-6.js') }}"></script>
     @yield('footer-script')

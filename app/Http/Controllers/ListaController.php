@@ -77,7 +77,7 @@ class ListaController extends Controller
      */
     public function capitulo(Request $req){
        // if ($req->ajax()){ FIXME check this
-        \Log::channel('daily')->info('entrooooo');
+        \Log::channel('daily')->info($req->all());
         try {
             if ((int)$req->get('usu') === Auth::id() ){
                 $serieUsu = UsuSerie::join('serie','ususer.idSe', '=','serie.idSe')

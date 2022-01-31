@@ -28,7 +28,7 @@
             <th scope="col">@lang('list.score')</th>
             <th scope="col">@lang('list.type')</th>
             <th scope="col">@lang('list.progress')</th>
-            <th scope="col">@lang('list.comment')</th>
+            <th scope="col" style="width: 20%">@lang('list.comment')</th>
         </tr>
         </thead>
         <tbody>
@@ -84,8 +84,9 @@
                     <td><span id="cap{{ $ser->idSe }}"> {{ $ser->capitulo }}  </span> / {{$ser->episodios}} <i class="fas fa-plus-circle" data-se="{{ $ser->idSe }}" data-usu="{{ $ser->idUsu }}"></i></td>
                 @endif
 
-                <td> <span class="spanre" id="s{{$loop->iteration}}" data-ids="{{$loop->iteration}}" data-re="{{ $ser->review }}">{{  $ser->review == "" ? "---" : $ser->review }}  </span>
-                    <textarea id="txt{{$loop->iteration}}" class="form-control tex1" hidden name="des" data-idt="{{$loop->iteration}}"  data-se="{{$ser->idSe}}" data-usu="{{ $ser->idUsu }}" maxlength="999" rows="2"></textarea>
+                <td>
+                    <span class="spanCommentUser" id="spanCommentUser-{{$loop->iteration}}" data-idrow="{{$loop->iteration}}">{{  $ser->review === "" ? "---" : $ser->review }}  </span>
+                    <textarea id="textareaCommentUser-{{$loop->iteration}}" class="form-control textareaCommentUser" hidden name="des" data-idrow="{{$loop->iteration}}"  data-ser="{{$ser->idSe}}" data-usu="{{ $ser->idUsu }}" maxlength="254" rows="2"></textarea>
                 </td>
             </tr>
 
@@ -125,6 +126,51 @@
                     });
                 })
             })
+
+            let editCommentUser = document.querySelectorAll('.spanCommentUser');
+            editCommentUser.forEach(item => {
+               item.addEventListener('click', function (e){
+                   console.log(e.target.innerText,e.target.dataset.idrow );
+                   let textarea = document.getElementById('textareaCommentUser-' + e.target.dataset.idrow);
+                   textarea.value = e.target.innerText;
+                   textarea.hidden = false;
+                   e.target.style.display = 'none';
+               });
+            });
+
+            let setCommentUser = document.querySelectorAll('.textareaCommentUser');
+            setCommentUser.forEach( item => {
+                item.addEventListener('focusout', function (e){
+                   let id = e.target.dataset.idrow;
+                   let text = e.target.value;
+
+                   sendRequest('/lista/review',{
+                       'usu': e.target.dataset.usu,
+                       'ser': e.target.dataset.ser,
+                       'text': e.target.value,
+                   }).then( data => {
+                       console.log(data);
+                       if( data.error){
+                           console.error(data.msg);
+                           if(data.msg){
+                               let textmsg = '';
+                                for( let x in data.msg){
+                                    textmsg += data.msg[x];
+                                }
+                               alert(textmsg);
+                           } else {
+                               alert(lang[language].error_generic);
+                           }
+                       } else {
+                           let spanCommentUser = document.getElementById('spanCommentUser-' + id)
+                           spanCommentUser.innerText = text;
+                           document.getElementById('textareaCommentUser-' + id).hidden = true;
+                           spanCommentUser.style.display = 'block';
+                       }
+                   });
+                });
+            })
+
         }, false);
     </script>
 

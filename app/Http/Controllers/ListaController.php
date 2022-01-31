@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class ListaController extends Controller
 {
@@ -123,14 +124,39 @@ class ListaController extends Controller
     /** Change the review of the anime that have the user
      * @param Request $req
      */
-    public function review(Request $req){
-        if ($req->ajax()){
-            if (Auth::id() == $req->get('usu')) {
-                $serie = $req->get('se');
+    public function review(Request $req) : \Illuminate\Http\JsonResponse
+    {
+        $validator = Validator::make($req->all(),[
+            'text' => 'string|max:254'
+        ],[
+            'text.string' => trans('list.validation_string'),
+            'text.max' => trans('list.validation_max_254'),
+        ]);
+        if ($validator->fails()){
+            $customReturn = ['error' => true];
+            $customReturn += ['msg' => $validator->errors()];
+            return response()->json($customReturn);
+        }
+        if (Auth::id() === (int)$req->get('usu')) {
+            try {
+                $serie = $req->get('ser');
                 $txt = $req->get('text');
                 $this->updateReview($serie, $txt);
+
+                return response()->json([
+                    'error' => false
+                ]);
+            } catch (\Exception $e){
+                Log::channel('daily')->debug($e);
+                return response()->json([
+                    'error' => true,
+                ]);
             }
+
         }
+        return response()->json([
+            'error' => true,
+        ]);
     }
 
     /** Add a new anime to the list of the user.

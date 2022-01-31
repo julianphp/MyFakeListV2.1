@@ -18,5 +18,7 @@ return [
     'fecEnd' => 'Date Finish:',
     'update' => 'Updating',
     'fecEndUs' => 'Not finished yet.',
-    'edit' => 'Edit'
+    'edit' => 'Edit',
+    'validation_string' => 'Check the formatting of the text to ensure that it does not contain impermissible characters.',
+    'validation_max_254' => 'The text cannot be longer than 254 characters.',
 ];

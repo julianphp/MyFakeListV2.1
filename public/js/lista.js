@@ -167,11 +167,11 @@ $(document).ready(function () {
              sts = "Para Ver"
         }
         if (fav === 1){
-            $("#favD").show();
-            $("#favA").hide();
+            document.getElementById('favD').hidden = false;
+            document.getElementById('favA').hidden = true;
         } else {
-            $("#favA").show();
-            $("#favD").hide();
+            document.getElementById('favA').hidden = false;
+            document.getElementById('favD').hidden = true;
         }
 
         $(".selEst").val(sts).find("option[value='" + sts +"']").attr('selected', true);
@@ -181,6 +181,7 @@ $(document).ready(function () {
     /**
      * Check if the anime is in favorites or not
      */
+    /*
     $(".btnfav").click(function () {
         $(this).hide();
         var ope = $(this).data('opefav');
@@ -191,10 +192,11 @@ $(document).ready(function () {
 
         modFav(idUsu,idSe,ope);
     });
-
+    */
     /**
      * Delete the anime from the user list
      */
+    /*
     $("#btnd").click(function () {
         var titulo = $("#tit").val();
         var idSe = $("#idSeM").val();
@@ -207,6 +209,8 @@ $(document).ready(function () {
         })
     });
 
+
+     */
     /**
      * edit the score
      */

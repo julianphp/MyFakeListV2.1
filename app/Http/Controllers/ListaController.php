@@ -201,15 +201,27 @@ class ListaController extends Controller
     /** Delete an anime of the user list
      * @param Request $req
      */
-    public function borrarUsuSe(Request $req){
-        if ($req->ajax()){
-            if (Auth::id() == $req->get('usu')){
+    public function borrarUsuSe(Request $req) : \Symfony\Component\HttpFoundation\JsonResponse
+    {
+        if (Auth::id() === (int)$req->get('usu')) {
+            try {
                 UsuSerie::usuario($req->get('usu'))
-                            ->serie($req->get('se'))
-                            ->delete();
-
+                    ->serie($req->get('ser'))
+                    ->delete();
+                return response()->json([
+                    'error' => false
+                ]);
+            } catch (\Exception $e) {
+                Log::channel('daily')->debug($e);
+                return response()->json([
+                    'error' => true
+                ]);
             }
         }
+
+        return response()->json([
+                'error' => true
+            ]);
     }
 
     /** Change the status of an anime that are seing the user
@@ -229,20 +241,30 @@ class ListaController extends Controller
     /** add an anime to favorites user list
      * @param Request $req
      */
-    public function favoritos(Request $req){
-        if ($req->ajax()){
+    public function favoritos(Request $req) : \Illuminate\Http\JsonResponse
+    {
+        try {
             if (Auth::id() == $req->get('usu')){
-                if ($req->get('opeS') == 0){
+                if ((int)$req->get('ope') === 0){
                     UsuSerie::usuario(Auth::id())
-                            ->serie($req->get('se'))
-                            ->update(['favorita'=> 0]);
-                } elseif ($req->get('opeS') ==1){
+                        ->serie($req->get('ser'))
+                        ->update(['favorita'=> 0]);
+                } elseif ((int)$req->get('ope') === 1){
                     UsuSerie::usuario(Auth::id())
-                        ->serie($req->get('se'))
+                        ->serie($req->get('ser'))
                         ->update(['favorita'=> 1]);
                 }
             }
+            return response()->json([
+                'error' => false
+            ]);
+        } catch (\Exception $e){
+            Log::channel('daily')->debug($e);
+            return response()->json([
+                'error' => true,
+            ]);
         }
+
     }
 
     /** Edit options of the Modal in anime list

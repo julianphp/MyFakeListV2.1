@@ -113,5 +113,6 @@
     <script src="{{ asset('js/list/score.js') }}"></script>
     <script src="{{ asset('js/list/chapter.js') }}"></script>
     <script src="{{ asset('js/list/comment.js') }}"></script>
-
+    <script src="{{ asset('js/list/modalEdit/changeFavoriteSerieUserList.js') }}"></script>
+    <script src="{{ asset('js/list/modalEdit/deleteSerieFromUserList.js') }}"></script>
 @endsection

@@ -28,7 +28,7 @@
             <th scope="col">@lang('list.score')</th>
             <th scope="col">@lang('list.type')</th>
             <th scope="col">@lang('list.progress')</th>
-            <th scope="col">@lang('list.comment')</th>
+            <th scope="col" style="width: 20%">@lang('list.comment')</th>
         </tr>
         </thead>
         <tbody>
@@ -86,7 +86,7 @@
 
                 <td>
                     <span class="spanCommentUser" id="spanCommentUser-{{$loop->iteration}}" data-idrow="{{$loop->iteration}}">{{  $ser->review === "" ? "---" : $ser->review }}  </span>
-                    <textarea id="textareaCommentUser-{{$loop->iteration}}" class="form-control textareaCommentUser" hidden name="des" data-idrow="{{$loop->iteration}}"  data-ser="{{$ser->idSe}}" data-usu="{{ $ser->idUsu }}" maxlength="999" rows="2"></textarea>
+                    <textarea id="textareaCommentUser-{{$loop->iteration}}" class="form-control textareaCommentUser" hidden name="des" data-idrow="{{$loop->iteration}}"  data-ser="{{$ser->idSe}}" data-usu="{{ $ser->idUsu }}" maxlength="254" rows="2"></textarea>
                 </td>
             </tr>
 
@@ -149,8 +149,18 @@
                        'ser': e.target.dataset.ser,
                        'text': e.target.value,
                    }).then( data => {
+                       console.log(data);
                        if( data.error){
-                           alert(lang[language].error_generic);
+                           console.error(data.msg);
+                           if(data.msg){
+                               let textmsg = '';
+                                for( let x in data.msg){
+                                    textmsg += data.msg[x];
+                                }
+                               alert(textmsg);
+                           } else {
+                               alert(lang[language].error_generic);
+                           }
                        } else {
                            let spanCommentUser = document.getElementById('spanCommentUser-' + id)
                            spanCommentUser.innerText = text;

@@ -70,7 +70,7 @@
                 </td>
                 <td class="align-middle"> <a href="{{ route('serie.ver',['idSe'=> $ser->idSe,'titulo'=>$ser->titulo]) }}" > {{ $ser->titulo }} </a>  </td>
                 <td class="align-middle">
-                    <span class="spanScoreUser" id="sco1{{$loop->iteration}}" data-idsc="{{$loop->iteration}}">{{ $ser->score == NULL ? "-" : $ser->score}}  </span>
+                    <span class="spanScoreUser" id="spanIdScoreUser-{{$loop->iteration}}" data-idsc="{{$loop->iteration}}">{{ $ser->score == NULL ? "-" : $ser->score}}  </span>
                     <div class="form-group selectScoreUser" hidden id="selectScoreUser-{{$loop->iteration}}" >
                         <select class="form-control score"  data-idscore="{{$loop->iteration}}" data-ser="{{ $ser->idSe }}" data-usu="{{ $ser->idUsu }}">
                                 <option>-</option>
@@ -110,92 +110,8 @@
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
     <script src="{{ asset('js/lista.js') }}"></script>
     <script src="{{ asset('js/language/list/lang.js') }}"></script>
-    <script>
-        window.addEventListener('load', function () {
-
-            let addCap = document.querySelectorAll('.fa-plus-circle');
-
-            addCap.forEach( item => {
-                item.addEventListener('click', function (e){
-                    sendRequest('/lista/cap',{
-                        'usu': e.target.dataset.usu,
-                        'ser': e.target.dataset.se
-                    }).then( data => {
-                        if (!data.error){
-                            document.getElementById('cap' + e.target.dataset.se).innerText = data.cap;
-                        } else {
-                            alert(lang[language].error_generic);
-                        }
-                    });
-                })
-            })
-
-            let editCommentUser = document.querySelectorAll('.spanCommentUser');
-            editCommentUser.forEach(item => {
-               item.addEventListener('click', function (e){
-                   let textarea = document.getElementById('textareaCommentUser-' + e.target.dataset.idrow);
-                   textarea.value = e.target.innerText;
-                   textarea.hidden = false;
-                   e.target.style.display = 'none';
-               });
-            });
-
-            let setCommentUser = document.querySelectorAll('.textareaCommentUser');
-            setCommentUser.forEach( item => {
-                item.addEventListener('focusout', function (e){
-                   let id = e.target.dataset.idrow;
-                   let text = e.target.value;
-
-                   sendRequest('/lista/review',{
-                       'usu': e.target.dataset.usu,
-                       'ser': e.target.dataset.ser,
-                       'text': e.target.value,
-                   }).then( data => {
-                       if( data.error){
-                           if(data.msg){
-                               let textmsg = '';
-                                for( let x in data.msg){
-                                    textmsg += data.msg[x];
-                                }
-                               alert(textmsg);
-                           } else {
-                               alert(lang[language].error_generic);
-                           }
-                       } else {
-                           let spanCommentUser = document.getElementById('spanCommentUser-' + id)
-                           spanCommentUser.innerText = text;
-                           document.getElementById('textareaCommentUser-' + id).hidden = true;
-                           spanCommentUser.style.display = 'block';
-                       }
-                   });
-                });
-            });
-
-            let chooseScore = document.querySelectorAll('.spanScoreUser');
-            chooseScore.forEach(item => {
-               item.addEventListener('click', function (e) {
-                   e.target.hidden = true;
-                   document.getElementById('selectScoreUser-' + e.target.dataset.idsc).hidden = false;
-               });
-            });
-
-            let uploadScore = document.querySelectorAll('.selectScoreUser');
-            uploadScore.forEach(item => {
-               item.addEventListener('change', function (e){
-                   console.log(e.target.value);
-                   sendRequest('/lista/score',{
-                       'usu': e.target.dataset.usu,
-                       'ser': e.target.dataset.ser,
-                       'sc': e.target.value
-                   }).then(data => {
-                        if (data.error){
-                            alert(lang[language].error_generic)
-                        }
-                   });
-               });
-            });
-
-        }, false);
-    </script>
+    <script src="{{ asset('js/list/score.js') }}"></script>
+    <script src="{{ asset('js/list/chapter.js') }}"></script>
+    <script src="{{ asset('js/list/comment.js') }}"></script>
 
 @endsection

@@ -48,82 +48,85 @@
         <div class="col-8">
 
 
-           @if($user != false)
-            <div id="addser">
+            @if($user)
+                <input type="hidden" id="idUser" value="{{ $user->idUsu }}">
+                <div id="addser">
 
 
+                    @if(!$serieUsu)
+                        <div>
+                            <button type="button" class="btn btn-info" id="add" data-usu="{{$user->idUsu}}"
+                                    data-se="{{$serie->idSe}}">@lang('anime.add')</button>
 
-
-                @if($serieUsu == false)
-                <div>
-                    <button type="button" class="btn btn-info" id="add" data-usu="{{$user->idUsu}}"  data-se="{{$serie->idSe}}">@lang('anime.add')</button>
-
-                </div>
-                @else
-                {{-- Mostramos en el desplegable con el estado en que tiene la serie--}}
-                <div class="form-group"  >
-                    <p>@lang('anime.statusUser')</p>
-                    <select class="form-control selEst" data-usu="{{$user->idUsu}}"  data-se="{{$serie->idSe}}"  >
-
-
-
-                        @foreach($estados as $estado)
-                            @if($estado == $serieUsu[0]->status)
-
-
-                        <option selected class="p-3 mb-2 bg-success text-white" >{{ $estado === "Para_Ver" ? "Para Ver" : $estado }} </option>
-                            @else
-                        <option >{{ $estado === "Para_Ver" ? "Para Ver" : $estado }} </option>
-                            @endif
-                        @endforeach
-
-
-                    </select>
-                </div>
-                <!-- SACAMOS LA SERIE QUE ESTA SIGUIENDO EL USUARIO -->
-
-                <p>@lang('anime.episodesUser')</p>
-                @if($serieUsu[0]->status === "Completada")
-                    <span id="cap{{$serie->idSe}}">{{$serieUsu[0]->capitulo}}</span>
-                @else
-                    <span id="cap{{$serie->idSe}}">{{$serieUsu[0]->capitulo}}</span> /  {{$serie->episodios}}<i class="fas fa-plus-circle"  data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}"></i>
-                @endif    <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
-
-                <!-- SELECTOR DE PUNTUACION -->
-                <div class="form-group">
-                    <p>@lang('anime.score')</p>
-                    <select class="form-control score" data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">
-
-                        @for($x = 0; $x <=10;$x++)
-                            @if((int)$serieUsu[0]->score === $x)
-                        <option selected>{{$x}}</option>
-
-                            @else
-
-                        <option >{{$x}}</option>
-                            @endif
-                        @endfor
-                            @if($serieUsu[0]->score === NULL)
-                        <option selected>@lang('messages.choose_score')</option>
-                            @endif
-                    </select>
-                </div>
-                <button type="button" class="btn btn-danger" id="btnd" data-til="{{$serie->titulo}}" data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">@lang('anime.delete')</button>
-
-               @if($serieUsu[0]->favorita == 1)
-                <button type="button" class="btn btn-danger" id="fav" data-se="{{$serie->idSe}}"  data-usu="{{$user->idUsu}}" data-ope="0">@lang('anime.deleteFav')</button>
-
+                        </div>
                     @else
+                        {{-- Mostramos en el desplegable con el estado en que tiene la serie--}}
+                        <div class="form-group">
+                            <p>@lang('anime.statusUser')</p>
+                            <select id="selectStatus" class="form-control selEst" data-ser="{{$serie->idSe}}">
 
-                <button type="button" class="btn btn-info" id="fav" data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}" data-ope="1">@lang('anime.favorite')</button>
+                                @foreach($estados as $estado)
+                                    @if($estado == $serieUsu[0]->status)
+
+
+                                        <option selected
+                                                class="p-3 mb-2 bg-success text-white">{{ $estado === "Para_Ver" ? "Para Ver" : $estado }} </option>
+                                    @else
+                                        <option>{{ $estado === "Para_Ver" ? "Para Ver" : $estado }} </option>
+                                    @endif
+                                @endforeach
+
+
+                            </select>
+                        </div>
+                        <!-- SACAMOS LA SERIE QUE ESTA SIGUIENDO EL USUARIO -->
+
+                        <p>@lang('anime.episodesUser')</p>
+                        @if($serieUsu[0]->status === "Completada")
+                            <span id="cap{{$serie->idSe}}">{{$serieUsu[0]->capitulo}}</span>
+                        @else
+                            <span id="cap{{$serie->idSe}}">{{$serieUsu[0]->capitulo}}</span> /  {{$serie->episodios}}<i
+                                class="fas fa-plus-circle" data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}"></i>
+                        @endif
+                        <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
+
+                        <!-- SELECTOR DE PUNTUACION -->
+                        <div class="form-group">
+                            <p>@lang('anime.score')</p>
+                            <select class="form-control score" data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">
+
+                                @for($x = 0; $x <=10;$x++)
+                                    @if((int)$serieUsu[0]->score === $x)
+                                        <option selected>{{$x}}</option>
+
+                                    @else
+
+                                        <option>{{$x}}</option>
+                                    @endif
+                                @endfor
+                                @if($serieUsu[0]->score === null)
+                                    <option selected>@lang('messages.choose_score')</option>
+                                @endif
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-danger" id="btnd" data-til="{{$serie->titulo}}"
+                                data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">@lang('anime.delete')</button>
+
+                        @if($serieUsu[0]->favorita == 1)
+                            <button type="button" class="btn btn-danger" id="fav" data-se="{{$serie->idSe}}"
+                                    data-usu="{{$user->idUsu}}" data-ope="0">@lang('anime.deleteFav')</button>
+
+                        @else
+
+                            <button type="button" class="btn btn-info" id="fav" data-se="{{$serie->idSe}}"
+                                    data-usu="{{$user->idUsu}}" data-ope="1">@lang('anime.favorite')</button>
+
+                        @endif
 
                     @endif
 
-                @endif
 
-
-
-            </div>
+                </div>
             @endif
 
 
@@ -202,5 +205,5 @@
 @section('footer-script')
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
     <script src="{{ asset('js/anime.js') }}"></script>
-
+    <script src="{{ asset('js/serie/changeStatusUser.js') }}"></script>
 @endsection

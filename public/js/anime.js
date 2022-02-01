@@ -162,6 +162,7 @@ $(document).ready(function () {
     /**
      * Select the status and call to the ajax function
      */
+    /*
     $(".selEst").focusout(function () {
         var sts = $(this).val();
         var usu = $(this).data("usu");
@@ -174,6 +175,8 @@ $(document).ready(function () {
 
 
     });
+    */
+
     /**
      * Add the anime to the anime list of the user at click in the botton
      */

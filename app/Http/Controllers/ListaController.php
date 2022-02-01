@@ -228,14 +228,26 @@ class ListaController extends Controller
      * @param Request $req
      */
     public function modStatus(Request $req){
-        if ($req->ajax()){
+        if (Auth::id() === (int)$req->get('usu')) {
+            try {
+                $sts = $req->get('sts');
+                $idSe = $req->get('ser');
 
-            if (Auth::id() == $req->get('usu')){
-                $sts = $req->get('est');
-                $idSe = $req->get('se');
-                $this->updateStatus($sts,$idSe);
+                $this->updateStatus($sts, $idSe);
+                return response()->json([
+                    'error' => false,
+                ]);
+            } catch (\Exception $e) {
+                Log::channel('daily')->debug($e);
+                return response()->json([
+                    'error' => true,
+                ]);
             }
         }
+        return response()->json([
+            'error' => true,
+        ]);
+
     }
 
     /** add an anime to favorites user list

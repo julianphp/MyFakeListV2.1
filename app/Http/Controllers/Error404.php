@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Error404 extends Controller
 {
-    public function error404(){
+    public function error404(): \Illuminate\Http\Response
+    {
         $array = [1, 2, 3];
 
         $random = Arr::random($array);

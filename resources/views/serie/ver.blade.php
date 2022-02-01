@@ -2,10 +2,6 @@
 @section('title')
     Serie {{ $serie->titulo }} - MyFakeList
 @endsection
-@section('head')
-    <script src="https://kit.fontawesome.com/b873749123.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/anime.js') }}"></script>
-@endsection
 @section('content')
 
     <br>
@@ -22,16 +18,16 @@
                     <p>@lang('anime.details')</p>
                     <hr>
                     <ul>
-                        <li><b>@lang('anime.jTitle')</b> {{  $serie->tituloJap != "NULL" ? $serie->tituloJap : __('anime.notAvalaible') }} </li>
+                        <li><b>@lang('anime.jTitle')</b> {{  $serie->tituloJap != "NULL" ? $serie->tituloJap : trans('anime.notAvalaible') }} </li>
 
                         <li><b>@lang('anime.study')</b>  {{ $estudio->NombreEstudio }} </li>
-                        <li><b>@lang('anime.status')</b> {{  $serie->estado != "NULL" ? $serie->estado : __('anime.notAvalaible') }} </li>
-                        <li><b>@lang('anime.type')</b> {{ $serie->tipo != "NULL" ? $serie->tipo : __('anime.notAvalaible')  }} </li>
-                        <li><b>@lang('anime.episodes')</b> {{  $serie->episodios != "NULL" ? $serie->episodios : __('anime.notAvalaible') }} </li>
-                        <li><b>@lang('anime.duration')</b> {{ $serie->duracion != "Unknown" ? $serie->duracion : __('anime.notAvalaible')}}  </li>
+                        <li><b>@lang('anime.status')</b> {{  $serie->estado != "NULL" ? $serie->estado : trans('anime.notAvalaible') }} </li>
+                        <li><b>@lang('anime.type')</b> {{ $serie->tipo != "NULL" ? $serie->tipo : trans('anime.notAvalaible')  }} </li>
+                        <li><b>@lang('anime.episodes')</b> {{  $serie->episodios != "NULL" ? $serie->episodios : trans('anime.notAvalaible') }} </li>
+                        <li><b>@lang('anime.duration')</b> {{ $serie->duracion != "Unknown" ? $serie->duracion : trans('anime.notAvalaible')}}  </li>
 
-                        <li><b>@lang('anime.fecEmi')</b> {{ $serie->fec_ini != NULL ? \Carbon\Carbon::parse($serie->fec_ini)->format('d-m-Y')  : __('anime.notAvalaible') }} </li>
-                        <li><b>@lang('anime.fecEnd')</b> {{ $serie->fec_fin != NULL ? \Carbon\Carbon::parse($serie->fec_fin)->format('d-m-Y') : __('anime.notAvalaible') }} </li>
+                        <li><b>@lang('anime.fecEmi')</b> {{ $serie->fec_ini != NULL ? \Carbon\Carbon::parse($serie->fec_ini)->format('d-m-Y')  : trans('anime.notAvalaible') }} </li>
+                        <li><b>@lang('anime.fecEnd')</b> {{ $serie->fec_fin != NULL ? \Carbon\Carbon::parse($serie->fec_fin)->format('d-m-Y') : trans('anime.notAvalaible') }} </li>
 
 
 
@@ -75,9 +71,9 @@
                             @if($estado == $serieUsu[0]->status)
 
 
-                        <option selected class="p-3 mb-2 bg-success text-white" >{{ $estado == "Para_Ver" ? "Para Ver" : $estado }} </option>
+                        <option selected class="p-3 mb-2 bg-success text-white" >{{ $estado === "Para_Ver" ? "Para Ver" : $estado }} </option>
                             @else
-                        <option >{{ $estado == "Para_Ver" ? "Para Ver" : $estado }} </option>
+                        <option >{{ $estado === "Para_Ver" ? "Para Ver" : $estado }} </option>
                             @endif
                         @endforeach
 
@@ -87,18 +83,19 @@
                 <!-- SACAMOS LA SERIE QUE ESTA SIGUIENDO EL USUARIO -->
 
                 <p>@lang('anime.episodesUser')</p>
-                @if($serieUsu[0]->status == "Completada")
+                @if($serieUsu[0]->status === "Completada")
                     <span id="cap{{$serie->idSe}}">{{$serieUsu[0]->capitulo}}</span>
                 @else
                     <span id="cap{{$serie->idSe}}">{{$serieUsu[0]->capitulo}}</span> /  {{$serie->episodios}}<i class="fas fa-plus-circle"  data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}"></i>
-                @endif
+                @endif    <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
+
                 <!-- SELECTOR DE PUNTUACION -->
                 <div class="form-group">
                     <p>@lang('anime.score')</p>
                     <select class="form-control score" data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">
 
                         @for($x = 0; $x <=10;$x++)
-                            @if($serieUsu[0]->score == $x)
+                            @if((int)$serieUsu[0]->score === $x)
                         <option selected>{{$x}}</option>
 
                             @else
@@ -106,8 +103,8 @@
                         <option >{{$x}}</option>
                             @endif
                         @endfor
-                            @if($serieUsu[0]->score == Null)
-                        <option selected>Elige una puntuacion</option>
+                            @if($serieUsu[0]->score === NULL)
+                        <option selected>@lang('messages.choose_score')</option>
                             @endif
                     </select>
                 </div>
@@ -175,9 +172,9 @@
                             <li><b>{{ $item->tipo }}</b><br></li> <p>
 
                             @foreach($serRel as $rel) {{-- entramos en el array con la info de las series concretas [x][] --}}
-                                @foreach($rel as $rr)  {{-- entramos en el array [x][y] --}}
-                                    @if($item->idRel == $rr->idSe)
-                             <a href="{{ route('serie.ver', ['idSe' => $rr->idSe, 'titulo' => $rr->titulo])  }}">{{$rr->titulo}} </a>
+                                @foreach($rel as $serie)  {{-- entramos en el array [x][y] --}}
+                                    @if($item->idRel == $serie->idSe)
+                             <a href="{{ route('serie.ver', ['idSe' => $serie->idSe, 'titulo' => $serie->titulo])  }}">{{$serie->titulo}} </a>
                                     @endif
                                     @endforeach
                                 @endforeach
@@ -200,5 +197,10 @@
     </div> <!-- end row -->
 
 @include('serie.borradoConfirmacion')
+
+@endsection
+@section('footer-script')
+    <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
+    <script src="{{ asset('js/anime.js') }}"></script>
 
 @endsection

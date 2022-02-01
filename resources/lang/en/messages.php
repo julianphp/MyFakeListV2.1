@@ -10,6 +10,8 @@ return [
     'meta_title' => 'The best webpage to follow anime status.',
     'meta_description' => 'Your new web to follow anime.',
 
+    'choose_score' => 'Choose an score.',
+
 
     'profile' => 'Profile',
     'save' => 'Save changes',

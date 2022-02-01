@@ -110,7 +110,7 @@
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
     <script src="{{ asset('js/lista.js') }}"></script>
     <script src="{{ asset('js/language/list/lang.js') }}"></script>
-     @if($user && $user->idUsu === $lista[0]->idUsu )
+     @if($user && $lista && $user->idUsu === $lista[0]->idUsu )
         <script src="{{ asset('js/list/score.js') }}"></script>
         <script src="{{ asset('js/list/chapter.js') }}"></script>
         <script src="{{ asset('js/list/comment.js') }}"></script>

@@ -213,6 +213,7 @@ $(document).ready(function () {
     /**
      * Delete the anime of the anime list.
      */
+    /*
     $("#btnd").click(function () {
 
         var usu = $(this).data("usu");
@@ -225,6 +226,7 @@ $(document).ready(function () {
         })
 
     });
+    */
     /**
      * Add/delete to the favirites user list
      */

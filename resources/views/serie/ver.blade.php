@@ -50,6 +50,8 @@
 
             @if($user)
                 <input type="hidden" id="idUser" value="{{ $user->idUsu }}">
+                <input type="hidden" id="idUsuM" value="{{ $user->idUsu }}">
+                <input type="hidden" id="idSeM" value="{{ $serie->idSe }}">
                 <div id="addser">
 
 
@@ -110,7 +112,7 @@
                             </select>
                         </div>
                         <button type="button" class="btn btn-danger" id="btnd" data-til="{{$serie->titulo}}"
-                                data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">@lang('anime.delete')</button>
+                                data-ser="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">@lang('anime.delete')</button>
 
                         @if($serieUsu[0]->favorita == 1)
                             <button type="button" class="btn btn-danger" id="fav" data-se="{{$serie->idSe}}"
@@ -206,4 +208,5 @@
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
     <script src="{{ asset('js/anime.js') }}"></script>
     <script src="{{ asset('js/serie/changeStatusUser.js') }}"></script>
+    <script src="{{ asset('js/list/modalEdit/deleteSerieFromUserList.js') }}"></script>
 @endsection

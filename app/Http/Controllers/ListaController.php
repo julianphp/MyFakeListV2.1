@@ -205,7 +205,7 @@ class ListaController extends Controller
     {
         if (Auth::id() === (int)$req->get('usu')) {
             try {
-                UsuSerie::usuario($req->get('usu'))
+                UsuSerie::usuario(Auth::id())
                     ->serie($req->get('ser'))
                     ->delete();
                 return response()->json([

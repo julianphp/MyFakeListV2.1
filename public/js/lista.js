@@ -151,6 +151,7 @@ $(document).ready(function () {
     /**
      * Show the modal for edit the entry of the anime user
      */
+    /*
     $(".edit").click(function () {
         $("#titulo").text($(this).data('titulo'))
         $("#idSeM").val($(this).data('idse'));
@@ -178,6 +179,8 @@ $(document).ready(function () {
        // $("#"+sts).attr('selected');
         $("#staticBackdrop").modal('show');
     });
+    */
+
     /**
      * Check if the anime is in favorites or not
      */

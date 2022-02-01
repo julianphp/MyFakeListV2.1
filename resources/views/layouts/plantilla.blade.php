@@ -55,7 +55,7 @@
 <script src="{{ asset('js/librarys/popper-1-16.js') }}"></script>
 <script src="{{ asset('js/librarys/bootstrap4-6.js') }}"></script>
 <script src="{{ asset('js/language/langGeneric.js') }}"></script>
-    @yield('footer-script')
+@yield('footer-script')
 
 </body>
 </html>

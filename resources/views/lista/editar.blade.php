@@ -20,7 +20,7 @@
                             <label for="status" class="col-md-6">@lang('list.status')</label>
                         </div>
                         <div class="col-sm-6">
-                            <select class="form-control selEst" name="status" >
+                            <select id="modalSelectStatus" class="form-control selEst" name="status" >
 
                                 @foreach($estados as $estado)
                                     <option>{{ $estado == "Para_Ver" ? "Para Ver" : $estado }} </option>

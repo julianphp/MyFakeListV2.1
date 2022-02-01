@@ -109,12 +109,13 @@
 @section('footer-script')
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
     <script src="{{ asset('js/lista.js') }}"></script>
-    <script src="{{ asset('js/language/list/langGeneric.js') }}"></script>
      @if($user && $lista && $user->idUsu === $lista[0]->idUsu )
+        <script src="{{ asset('js/list/locateList.js') }}"></script>
         <script src="{{ asset('js/list/score.js') }}"></script>
         <script src="{{ asset('js/list/chapter.js') }}"></script>
         <script src="{{ asset('js/list/comment.js') }}"></script>
         <script src="{{ asset('js/list/modalEdit/changeFavoriteSerieUserList.js') }}"></script>
         <script src="{{ asset('js/list/modalEdit/deleteSerieFromUserList.js') }}"></script>
+        <script src="{{ asset('js/list/showModalEditSeriesUser.js') }}"></script>
      @endif
 @endsection

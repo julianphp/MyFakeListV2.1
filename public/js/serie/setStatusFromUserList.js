@@ -8,7 +8,7 @@ if (selectStatus){
             'sts': e.target.value === 'Para Ver' ? 'Para_Ver' : e.target.value,
         }).then( data => {
             if (data.error){
-                alert(lang[language].error_generic);
+                alert(langGeneric[language].error_generic);
             }
 
         });

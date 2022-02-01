@@ -1,4 +1,4 @@
-lang = {
+langGeneric = {
     'es': {
             'error_generic': 'Ha ocurrido un error interno, intentalo de nuevo mas tarde, si el problema persiste,' +
                     ' contante con un administrador.',

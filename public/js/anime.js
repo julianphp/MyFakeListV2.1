@@ -1,3 +1,4 @@
+//TODO NOT IN USE
 /**
  * Ajax request for change the status anime of the user
  * @param usu
@@ -162,7 +163,6 @@ $(document).ready(function () {
     /**
      * Select the status and call to the ajax function
      */
-    /*
     $(".selEst").focusout(function () {
         var sts = $(this).val();
         var usu = $(this).data("usu");
@@ -175,8 +175,6 @@ $(document).ready(function () {
 
 
     });
-    */
-
     /**
      * Add the anime to the anime list of the user at click in the botton
      */
@@ -213,7 +211,6 @@ $(document).ready(function () {
     /**
      * Delete the anime of the anime list.
      */
-    /*
     $("#btnd").click(function () {
 
         var usu = $(this).data("usu");
@@ -226,17 +223,13 @@ $(document).ready(function () {
         })
 
     });
-    */
     /**
      * Add/delete to the favirites user list
      */
-    /*
     $("#fav").click(function () {
         var fav = $(this).data("ope");
         var usu = $(this).data("usu");
         var se = $(this).data("se");
         modFav(usu,se, fav);
     });
-
-     */
 });

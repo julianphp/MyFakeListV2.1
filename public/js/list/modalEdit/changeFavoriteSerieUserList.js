@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
                 setTimeout(function () {
                     document.getElementById('btnLoading').hidden = true;
                     if (data.error){
-                        alert(lang[language].error_generic);
+                        alert(langGeneric[language].error_generic);
                     } else {
                         e.target.hidden = true;
                         document.getElementById(e.target.id === 'favA' ? 'favD' : 'favA').hidden = false;

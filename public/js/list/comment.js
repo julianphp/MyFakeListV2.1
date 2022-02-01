@@ -28,7 +28,7 @@ window.addEventListener('load', function () {
                         }
                         alert(textmsg);
                     } else {
-                        alert(lang[language].error_generic);
+                        alert(langGeneric[language].error_generic);
                     }
                 } else {
                     let spanCommentUser = document.getElementById('spanCommentUser-' + id)

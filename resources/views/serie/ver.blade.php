@@ -57,8 +57,8 @@
 
                     @if(!$serieUsu)
                         <div>
-                            <button type="button" class="btn btn-info" id="add" data-usu="{{$user->idUsu}}"
-                                    data-se="{{$serie->idSe}}">@lang('anime.add')</button>
+                            <button type="button" class="btn btn-info" id="btnAddToUserList" data-usu="{{$user->idUsu}}"
+                                    data-ser="{{$serie->idSe}}">@lang('anime.add')</button>
 
                         </div>
                     @else
@@ -95,7 +95,7 @@
                         <!-- SELECTOR DE PUNTUACION -->
                         <div class="form-group">
                             <p>@lang('anime.score')</p>
-                            <select class="form-control score" data-se="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">
+                            <select class="form-control score selectScoreUser" data-ser="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">
 
                                 @for($x = 0; $x <=10;$x++)
                                     @if((int)$serieUsu[0]->score === $x)
@@ -206,8 +206,10 @@
 @endsection
 @section('footer-script')
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
-    <script src="{{ asset('js/anime.js') }}"></script>
     <script src="{{ asset('js/serie/setStatusFromUserList.js') }}"></script>
     <script src="{{ asset('js/list/modalEdit/deleteSerieFromUserList.js') }}"></script>
     <script src="{{ asset('js/serie/setFavoriteFromUserList.js') }}"></script>
+    <script src="{{ asset('js/list/chapter.js') }}"></script>
+    <script src="{{ asset('js/list/score.js') }}"></script>
+    <script src="{{ asset('js/serie/addSeriesToUserList.js') }}"></script>
 @endsection

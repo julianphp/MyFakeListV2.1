@@ -173,29 +173,37 @@ class ListaController extends Controller
     /** Add a new anime to the list of the user.
      * @param Request $req
      */
-    public function status(Request $req){
-        if ($req->ajax()){
-            if ($req->get('usu') == Auth::id()){
-                $ususer = New UsuSerie();
-                $ususer->idUsu = $req->get('usu');
-                $ususer->idSe = $req->get('se');
+    public function addSeriesToUserList(Request $req): \Illuminate\Http\JsonResponse
+    {
+        if ((int)$req->get('usu') === Auth::id()) {
+            try {
+                $ususer = new UsuSerie();
+                $ususer->idUsu = Auth::id();
+                $ususer->idSe = $req->get('ser');
                 $ususer->capitulo = 0;
                 $ususer->status = "Viendo";
-                $ususer->score = NULL;
-                $ususer->review = NULL;
+                $ususer->score = null;
+                $ususer->review = null;
                 $ususer->fec_add = Carbon::now();
-                $ususer->fec_end = NULL;
-                $ususer->favorita = NULL;
+                $ususer->fec_end = null;
+                $ususer->favorita = null;
 
                 $ususer->save();
+                return response()->json([
+                    'error' => false,
+                ]);
+            } catch (\Exception $e){
+                Log::channel('daily')->debug($e);
+                return response()->json([
+                    'error' => true,
+                ]);
             }
 
-
-
-            //   UsuSerie::create(['idUsu'=> 11,'idSe' => 32555,'capitulo' => 0,'status'=> 'Viendo','score'=>NULL,'review'=>NULL,'fec_ini' =>Carbon::now(),'fec_fin'=>NULL,'favorita'=>0]);
-
-
         }
+        return response()->json([
+            'error' => true,
+        ]);
+
     }
 
     /** Delete an anime of the user list

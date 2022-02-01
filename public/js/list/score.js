@@ -16,10 +16,13 @@ window.addEventListener('load', function () {
                 'sc': e.target.value
             }).then(data => {
                 if (data.error){
-                    alert(lang[language].error_generic)
+                    alert(langGeneric[language].error_generic)
                 } else {
-                    document.getElementById('selectScoreUser-' + e.target.dataset.idscore).hidden = true;
-                    document.getElementById('spanIdScoreUser-' + e.target.dataset.idscore).hidden = false;
+                    if (document.getElementById('selectScoreUser-' + e.target.dataset.idscore)){
+                        document.getElementById('selectScoreUser-' + e.target.dataset.idscore).hidden = true;
+                        document.getElementById('spanIdScoreUser-' + e.target.dataset.idscore).hidden = false;
+                    }
+
                 }
             });
         });

@@ -55,7 +55,7 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
         //operaciones de la serie de la lista del usuario
         Route::post('cap', 'ListaController@capitulo');
         Route::post('score', 'ListaController@score');
-        Route::post('status', 'ListaController@status');
+        Route::post('addSeriesToUserList', 'ListaController@addSeriesToUserList');
         Route::post('borrarUsuSe', 'ListaController@borrarUsuSe');
         Route::post('modStatus', 'ListaController@modStatus');
         Route::post('favoritos', 'ListaController@favoritos');

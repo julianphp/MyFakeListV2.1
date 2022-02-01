@@ -7,7 +7,7 @@ if (setFavorite){
             'ope': e.target.dataset.ope
         }).then(data => {
             if(data.error){
-                alert(lang[language].error_generic);
+                alert(langGeneric[language].error_generic);
             } else {
                 location.reload();
             }

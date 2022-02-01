@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
                     'ser': document.getElementById('idSeM').value,
                 }).then(data => {
                     if (data.error) {
-                        alert(lang[language].error_generic);
+                        alert(langGeneric[language].error_generic);
                     }
                     window.location.reload();
                 })

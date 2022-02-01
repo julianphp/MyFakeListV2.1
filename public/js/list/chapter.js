@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
                 if (!data.error) {
                     document.getElementById('cap' + e.target.dataset.se).innerText = data.cap;
                 } else {
-                    alert(lang[language].error_generic);
+                    alert(langGeneric[language].error_generic);
                 }
             });
         })

@@ -7,7 +7,10 @@ if (selectStatus){
             'ser': e.target.dataset.ser,
             'sts': e.target.value === 'Para Ver' ? 'Para_Ver' : e.target.value,
         }).then( data => {
-            console.log(data);
+            if (data.error){
+                alert(lang[language].error_generic);
+            }
+
         });
     });
 }

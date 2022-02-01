@@ -115,12 +115,12 @@
                                 data-ser="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">@lang('anime.delete')</button>
 
                         @if($serieUsu[0]->favorita == 1)
-                            <button type="button" class="btn btn-danger" id="fav" data-se="{{$serie->idSe}}"
+                            <button type="button" class="btn btn-danger" id="fav" data-ser="{{$serie->idSe}}"
                                     data-usu="{{$user->idUsu}}" data-ope="0">@lang('anime.deleteFav')</button>
 
                         @else
 
-                            <button type="button" class="btn btn-info" id="fav" data-se="{{$serie->idSe}}"
+                            <button type="button" class="btn btn-info" id="fav" data-ser="{{$serie->idSe}}"
                                     data-usu="{{$user->idUsu}}" data-ope="1">@lang('anime.favorite')</button>
 
                         @endif
@@ -207,6 +207,7 @@
 @section('footer-script')
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
     <script src="{{ asset('js/anime.js') }}"></script>
-    <script src="{{ asset('js/serie/changeStatusUser.js') }}"></script>
+    <script src="{{ asset('js/serie/setStatusFromUserList.js') }}"></script>
     <script src="{{ asset('js/list/modalEdit/deleteSerieFromUserList.js') }}"></script>
+    <script src="{{ asset('js/serie/setFavoriteFromUserList.js') }}"></script>
 @endsection

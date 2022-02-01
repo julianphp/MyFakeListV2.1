@@ -230,10 +230,13 @@ $(document).ready(function () {
     /**
      * Add/delete to the favirites user list
      */
+    /*
     $("#fav").click(function () {
         var fav = $(this).data("ope");
         var usu = $(this).data("usu");
         var se = $(this).data("se");
         modFav(usu,se, fav);
     });
+
+     */
 });

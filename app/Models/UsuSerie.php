@@ -27,9 +27,7 @@ class UsuSerie extends Model
      * @return mixed
      */
     public function scopeUsuario($query,$idUsu){
-        if ($idUsu){
-            return $query->where('idUsu','LIKE',"%$idUsu%");
-        }
+            return $query->where('idUsu',$idUsu);
     }
 
     /** Scope search for serie
@@ -38,9 +36,7 @@ class UsuSerie extends Model
      * @return mixed
      */
     public function scopeSerie($query,$idSe){
-        if ($idSe){
-            return $query->where('idSe','LIKE',"%$idSe%");
-        }
+            return $query->where('idSe',$idSe);
     }
 
 }

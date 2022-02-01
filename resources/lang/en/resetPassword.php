@@ -1,5 +1,6 @@
 <?php
 return [
+    'title' => 'Forgot my password - MyFakeList',
     'error' => 'The email is not in ours registry',
     'errorSend' => 'Error at send the email, try later or contact with an admin',
     'send' => 'Email send successfully, you will receive in the next minutes, check all inbox/spam folders.',

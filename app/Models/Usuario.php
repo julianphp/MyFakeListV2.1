@@ -41,9 +41,7 @@ class Usuario extends Authenticatable
      * @return mixed
      */
     public function scopeEmail($query,$email){
-        if ($email){
-            return $query->where('email','LIKE',"$email");
-        }
+            return $query->where('email',$email);
     }
     //
     public function series(){

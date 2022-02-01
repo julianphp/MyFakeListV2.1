@@ -45,8 +45,8 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
     });
     Route::match(['get','post'],'registro','RegistroController@registro')->name('registro') ;
     Route::match(['get','post'],'login','SesionController@login')->name('login') ;
-    Route::match(['get','post'],'olvidemicontrasenia','ResetPassword@sendMail')->name('olvidemicontrasenia');
-    Route::match(['get','post'],'nuevacontrasenia/{token}','ResetPassword@nueva')->name('nuevacontrasenia');
+    Route::match(['get','post'],'requestResetPassword','ResetPassword@RequestResetPassword')->name('requestResetPassword');
+    Route::match(['get','post'],'setNewRequestPasswordForget/{token}','ResetPassword@setNewRequestPasswordForget')->name('setNewRequestPasswordForget');
 
     Route::get('logout','SesionController@logout')->name('logout') ;
     Route::prefix('serie')->group(function (){

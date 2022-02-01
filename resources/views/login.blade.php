@@ -31,7 +31,7 @@
                 <label class="form-check-label" for="exampleCheck1">@lang('login.session')</label>
             </div>
             <button type="submit" class="btn btn-primary">@lang('login.login')</button>
-            <a class="btn btn-info" href="{{route('olvidemicontrasenia')}}" role="button">@lang('login.forgot')</a>
+            <a class="btn btn-info" href="{{route('requestResetPassword')}}" role="button">@lang('login.forgot')</a>
             </form>
         </div>
     </div>

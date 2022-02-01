@@ -1,5 +1,5 @@
+//TODO NOT IN USE
 /**
- * NOT IN USE.
  * AJAX Request for upload an eps of the anime
  * @param usu
  * @param se
@@ -151,7 +151,7 @@ $(document).ready(function () {
     /**
      * Show the modal for edit the entry of the anime user
      */
-    /*
+
     $(".edit").click(function () {
         $("#titulo").text($(this).data('titulo'))
         $("#idSeM").val($(this).data('idse'));
@@ -179,12 +179,12 @@ $(document).ready(function () {
        // $("#"+sts).attr('selected');
         $("#staticBackdrop").modal('show');
     });
-    */
+
 
     /**
      * Check if the anime is in favorites or not
      */
-    /*
+
     $(".btnfav").click(function () {
         $(this).hide();
         var ope = $(this).data('opefav');
@@ -195,11 +195,11 @@ $(document).ready(function () {
 
         modFav(idUsu,idSe,ope);
     });
-    */
+
     /**
      * Delete the anime from the user list
      */
-    /*
+
     $("#btnd").click(function () {
         var titulo = $("#tit").val();
         var idSe = $("#idSeM").val();
@@ -213,11 +213,11 @@ $(document).ready(function () {
     });
 
 
-     */
+
     /**
      * edit the score
      */
-    /*
+
     $(".sco1").click(function () {
         var id = $(this).data("idsc");
         $("#sco1"+id).hide();
@@ -225,7 +225,7 @@ $(document).ready(function () {
 
     });
 
-     */
+
     /**
      * edit the score
      */
@@ -248,7 +248,7 @@ $(document).ready(function () {
     /**
      * the review of the anime
      */
-    /*
+
     $(".spanCommentUser").click(function () {
         var text1 = $(this).text();
         var id = $(this).data("ids");
@@ -261,7 +261,7 @@ $(document).ready(function () {
     /**
      * Edit the textbox of the review
      */
-    /*
+
     $(".tex1").focusout( function () {
         var id = $(this).data("idt");
         var text =$(this).val();
@@ -278,7 +278,7 @@ $(document).ready(function () {
 
     });
 
-     */
+
 
 
 });

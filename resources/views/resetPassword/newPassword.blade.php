@@ -20,7 +20,7 @@
         @endif
         <div class="row justify-content-md-center">
             <div class="w-50">
-                <form method="post" action="{{ route('nuevacontrasenia',['token' => $token]) }}" >
+                <form method="post" action="{{ route('setNewRequestPasswordForget',['token' => $token]) }}" >
                     @csrf
                     <div class="form-group">
                         <label for="pass">@lang('resetPassword.newPass')</label>

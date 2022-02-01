@@ -34,21 +34,19 @@ class ServicioCorreo extends Mailable
     public function build()
     {
         return $this->view("correo")
-            ->from("kumiko@kumiko.es")
+            ->from("myfakelist@kumiko.es")
             ->subject("Bienvenida a mi sitio");
     }
 
-    /** Send the email to the user.
+    /** NOT IN USE
+     * Send the email to the user.
      * @param $email
      * @param $token
      * @return bool
      */
     public static function sendResetPass($email,$token){
-        if (App::getLocale() == "en"){
-            $subject = "Your password reset link - MyFakeList";
-        } else {
-            $subject = "Link Reestablecimiento de contraseña - MyFake List";
-        }
+
+        $subject = trans('email.email_subject_reset_password');
 
         $for = $email;
         $token = ['token' => $token];

@@ -60,7 +60,7 @@
             <tr>
                 <th class="align-middle text-center {{ $ser->status }}" scope="row">{{$loop->iteration}}</th>
                 <td class="align-middle text-center">
-                    <p class="text-justify"><img src="{{ $ser->img }}" width="40%">
+                    <p class="text-justify"><img alt="{{ $ser->titulo }}" src="{{ $ser->img }}" width="40%">
                         <a class="edit" href="#"
                         data-idse="{{$ser->idSe}}" data-titulo="{{$ser->titulo}}" data-sts="{{$ser->status}}"
                            data-fav="{{$ser->favorita}}" data-cap="{{$ser->capitulo}}" data-ini="{{$ser->fec_add}}" data-fin="{{$ser->fec_end}}"
@@ -108,7 +108,6 @@
 @endsection
 @section('footer-script')
     <script src="{{ asset('js/librarys/kit-fontawesome.js') }}"></script>
-    <script src="{{ asset('js/lista.js') }}"></script>
      @if($user && $lista && $user->idUsu === $lista[0]->idUsu )
         <script src="{{ asset('js/list/locateList.js') }}"></script>
         <script src="{{ asset('js/list/score.js') }}"></script>

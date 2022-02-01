@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 class ResetPassword extends Controller
 {
@@ -17,13 +19,13 @@ class ResetPassword extends Controller
      * @param Request $req
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public static function sendMail(Request $req)
+    public function RequestResetPassword(Request $req)
     {
         if (Auth::check()) {
             return redirect()->intended('inicio');
         } else {
             if (!$req->has('email')) {
-                return view('resetPassword.olvidemicontrasenia', ['user' => false]);
+                return view('resetPassword.requestResetPassword', ['user' => false]);
             } else {
                 $user = Usuario::email($req->get('email'))->get();
 
@@ -35,14 +37,17 @@ class ResetPassword extends Controller
                         'token' => $token,
                         'created_at' => Carbon::now()
                     ]);
+                    try {
+                        Mail::to($email)->send(new \App\Mail\ResetPassword($token));
+                        return view('resetPassword.requestResetPassword',['user' => false,'send' => true]);
 
-                    if (!ServicioCorreo::sendResetPass($email,$token)){
-                        return view('resetPassword.olvidemicontrasenia',['user' => false,'errorSend' => true]);
-                    } else {
-                        return view('resetPassword.olvidemicontrasenia',['user' => false,'send' => true]);
+                    } catch (\Exception $e){
+                        Log::channel('daily')->debug($e);
+                        return view('resetPassword.requestResetPassword',['user' => false,'errorSend' => true]);
+
                     }
                 } else {
-                    return view('resetPassword.olvidemicontrasenia',['user' => false, 'error' => true]);
+                    return view('resetPassword.requestResetPassword',['user' => false, 'error' => true]);
                 }
             }
         }
@@ -52,28 +57,30 @@ class ResetPassword extends Controller
      * @param Request $req
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public static function nueva(Request $req){
+    public function setNewRequestPasswordForget(Request $req){
         $token = $req->token;
         if (!Auth::check()) {
-            $user = DB::table('password_resets')->where('token',$token)->get();
-            $fecToken = Carbon::parse($user[0]->created_at);
-            $diff = $fecToken->diffInHours(Carbon::now());
+            $user = DB::table('password_resets')->where('token',$token)->first();
+            if(!$user){
+                return view('resetPassword.newPassword',['user' => false,'token' => false]);
+            }
+            $fecToken = Carbon::parse($user->created_at);
+            $diff = $fecToken->diffInRealHours(Carbon::now());
             if ($diff > 1) {
                 return view('resetPassword.newPassword',['user' => false,'token' => false]);
             }
             if (!$req->has('pass')){
-                if ( (!$user->isEmpty()) && ($user[0]->used != 1 ) ) {
+                if ( (int)$user->used !== 1 ) {
                     return view('resetPassword.newPassword',['user' => false,'token' => $token]);
-                } else {
-                    return view('resetPassword.newPassword',['user' => false,'token' => false]);
                 }
+                return view('resetPassword.newPassword',['user' => false,'token' => false]);
             } else {
                 $pass = $req->get('pass');
                 $pass1 = $req->get('pass1');
-                if( ($pass != $pass1) || (strlen($pass1) < 5)){
+                if( ($pass !== $pass1) || (strlen($pass1) < 5)){
                     return redirect()->back()->with('errorPass',true);
                 } else {
-                    Usuario::email($user[0]->email)->update(['password' => Hash::make($pass) ]);
+                    Usuario::email($user->email)->update(['password' => Hash::make($pass) ]);
                     DB::table('password_resets')->where('token',$token)->update(['used' => 1]);
                     return redirect()->intended('login')->with('success',true);
                 }
@@ -83,6 +90,7 @@ class ResetPassword extends Controller
         } else {
             return redirect()->intended('inicio');
         }
-        }
+
+    }
 
 }

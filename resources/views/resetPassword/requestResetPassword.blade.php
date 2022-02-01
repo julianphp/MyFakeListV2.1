@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 @section('title')
-    Olvide mi Contraseña - MyFakeList
+    @lang('resetPassword.title')
 @endsection
 @section('content')
     <br>
@@ -22,7 +22,7 @@
 
     <div class="row justify-content-md-center">
         <div class="w-50">
-            <form method="post" action="{{ route('olvidemicontrasenia') }}" >
+            <form method="post" action="{{ route('requestResetPassword') }}" >
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">@lang('resetPassword.email').</label>

@@ -10,7 +10,7 @@
 @endif
 @if (session('errorEmailSend'))
     <div class="alert alert-danger">
-        @lang('profile.errorEmailSend')
+        {{ session('errorEmailSend') }}
     </div>
 @endif
 @if (session('successEmail'))
@@ -30,13 +30,20 @@
 @endif
 
 
-@if(session('pass') == 'ok')
+@if(session('pass') === 'ok')
     <div class="alert alert-info">
         @lang('profile.successPass')
     </div>
 @endif
-@if(session('pass') == 'no')
+@if(session('pass') === 'no')
     <div class="alert alert-danger">
         @lang('profile.successError')
+    </div>
+@endif
+@if(session('validation_email'))
+    <div class="alert alert-danger">
+       @foreach(session('validation_email') as $item)
+            {{ $item }}
+       @endforeach
     </div>
 @endif

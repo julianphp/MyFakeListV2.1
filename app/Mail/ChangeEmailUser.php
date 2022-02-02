@@ -6,9 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\App;
 
-class ResetPassword extends Mailable
+class ChangeEmailUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,9 +30,9 @@ class ResetPassword extends Mailable
      */
     public function build()
     {
-        $subject = trans('email.email_subject_reset_password');
+        $subject = trans('changeEmail.your_link');
         return $this->from(config('mail.from.address'),config('mail.from.name'))
                     ->subject($subject)
-                    ->view('email.resetPassword');
+                    ->view('email.activateEmail');
     }
 }

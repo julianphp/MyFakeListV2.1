@@ -4,10 +4,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\ChangeEmailUser;
 use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class UserDelete extends  Controller
@@ -21,13 +24,15 @@ public function sendDeleteCon(){
         $user = Usuario::find(Auth::id());
 
         $token = Str::random(69);
-        $user->token_delete_account =$token;
+        $user->token_delete_account = $token;
         $user->token_delete_account_date = Carbon::now();
         $user->save();
 
-        if (ServicioCorreo::sendDeleteAccountVerification($user->email,$token)){
+        try {
+            Mail::to($user->email)->send(new ChangeEmailUser($token));
             return redirect()->back()->with('successMailDelAcc',true);
-        } else {
+        } catch (\Exception $e){
+            Log::channel('daily')->debug($e);
             return redirect()->back()->with('errorEmailSend',true);
         }
     }

@@ -27,7 +27,10 @@ return [
     'romance' => "Romance Anime:",
     'sol' => "Slice Of Life Anime:",
     'lasrtuserregistrer' => "Last Users Registrer:",
-    'successLogout' => 'Session Closed correct'
+    'successLogout' => 'Session Closed correct',
+
+    'email_taken' => 'The email address you entered is already in use, please choose another one.',
+    'email_format_incorrect' => 'The format of the email entered is not valid, please check the data again.',
 
 
 ];

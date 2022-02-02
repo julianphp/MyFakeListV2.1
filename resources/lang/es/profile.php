@@ -29,7 +29,7 @@ return [
     'changeEmail' => 'Cambio de correo',
     'changeEmail1' => 'Introduzca el nuevo email. Enviaremos un correo de verificacion a la nueva direccion para poder verificar el correo y aplicar el cambio',
     'errorEmail' => 'El correo proporcionado ya esta en uso, intentalo con otro',
-    'errorEmailSend' => 'Error al enviar el correo, intentelo de nuevo mas tarde o contacta con un admin, disculpa la molestia',
+    'errorEmailSend' => 'Error al enviar el correo, intentelo de nuevo mas tarde o contacta con un admin, disculpa las molestias.',
     'successEmail' => 'El correo de verificacion se ha enviado a la nueva direccion(<b>:EMAIL</b>) en los proximos minutos, recuerde revisar todas las bandejas incluida la de spam',
     'successMailDelAcc' => 'El correo se ha enviado correctamente, lo recibirá en los proximos minutos, recuerda revisar todas las bandejas.',
     'deleteAccount' => 'Eliminar cuenta',

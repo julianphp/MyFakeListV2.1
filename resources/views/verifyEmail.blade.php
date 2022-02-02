@@ -25,5 +25,10 @@
         </div>
     @endif
 
+    @if(isset($userMustLogin))
+        <div class="alert alert-info">
+            {{ $userMustLogin }}
+        </div>
+    @endif
 
 @endsection

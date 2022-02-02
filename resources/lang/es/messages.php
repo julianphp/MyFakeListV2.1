@@ -26,8 +26,10 @@ return [
     'romance' => "Animes de Romance:",
     'sol' => "Animes de Slice Of Life:",
     'lasrtuserregistrer' => "Ultimos Usuarios registrados:",
-    'successLogout' => 'Sesion Cerrada Correctamente'
+    'successLogout' => 'Sesion Cerrada Correctamente',
 
+    'email_taken' => 'El correo introducido ya esta en uso, por favor elige otro.',
+    'email_format_incorrect' => 'El formato del correo introducido no es valido, por favor verifique los datos nuevamente.',
 
 
 ];

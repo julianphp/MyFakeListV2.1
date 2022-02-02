@@ -1,5 +1,6 @@
 <?php
 return [
+    'your_link' => 'Your link for delete your account :( - MyFakeList',
     'email1' => 'This is your link for close your account.',
     'email2' => 'The link expires in 1(one) hour.',
     'info' => 'You are to delete your account permanently, this action is irrevocable and you cant recover later.',

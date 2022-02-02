@@ -86,8 +86,8 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
     });
 
     Route::prefix('email')->group(function (){
-        Route::post('change','EmailNew@sendVerification')->name('email.change');
-        Route::match(['get','post'],'verify/{token}','EmailNew@verifyEMail')->name('email.verify');
+        Route::post('change','changeEmailUser@changeEmailUser')->name('email.change');
+        Route::match(['get','post'],'verify/{token}','changeEmailUser@verifyNewEmailUser')->name('email.verify');
 
     });
 

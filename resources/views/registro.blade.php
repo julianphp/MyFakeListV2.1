@@ -33,23 +33,23 @@
     <div class="w-50">
         <form action="{{ route('registro') }}" method="post">
                 @csrf
-            <div class="form-group">
-                <label for="correo">@lang('signup.mail')</label>
+            <div class="mb-2">
+                <label class="form-label" for="correo">@lang('signup.mail')</label>
                 <input type="email" class="form-control mail" name="correo"  aria-describedby="emailHelp" required>
 
             </div>
-            <div class="form-group">
-                <label for="contrasenia">@lang('signup.pass')</label>
+            <div class="mb-2">
+                <label class="form-label" for="contrasenia">@lang('signup.pass')</label>
                 <input type="password" class="form-control pass" name="contrasenia" required>
                 <button type="button" class="btn btn-danger passreq" hidden>@lang('signup.passV')</button>
             </div>
-            <div class="form-group">
-                <label for="confircontrasenia">@lang('signup.pass1')</label>
+            <div class="mb-2">
+                <label class="form-label" for="confircontrasenia">@lang('signup.pass1')</label>
                 <input type="password" class="form-control passcon"  name="confircontrasenia" required>
                 <button type="button" class="btn btn-danger passfail" hidden>@lang('signup.passC')</button>
             </div>
-            <div class="form-group " >
-                <label for="nick">@lang('signup.nick')</label>
+            <div class="mb-2">
+                <label class="form-label" for="nick">@lang('signup.nick')</label>
                 <input type="text" class="form-control nick"  name="nick" required>
                 <button type="button" class="btn btn-danger rep1" hidden>@lang('signup.nickN')</button>
                 <button type="button" class="btn btn-danger nickcheck" hidden>@lang('signup.nickL')</button>

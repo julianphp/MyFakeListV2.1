@@ -45,7 +45,7 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
     });
     Route::match(['get','post'],'registro','RegistroController@registro')->name('registro') ;
     Route::match(['get','post'],'login','SesionController@login')->name('login') ;
-    Route::match(['get','post'],'requestResetPassword','ResetPassword@RequestResetPassword')->name('requestResetPassword');
+    Route::match(['get','post'],'requestResetPassword','ResetPassword@requestResetPassword')->name('requestResetPassword');
     Route::match(['get','post'],'setNewRequestPasswordForget/{token}','ResetPassword@setNewRequestPasswordForget')->name('setNewRequestPasswordForget');
 
     Route::get('logout','SesionController@logout')->name('logout') ;
@@ -86,8 +86,8 @@ Route::group(['middleware'=>'language'],function (){ // middleware change langua
     });
 
     Route::prefix('email')->group(function (){
-        Route::post('change','changeEmailUser@changeEmailUser')->name('email.change');
-        Route::match(['get','post'],'verify/{token}','changeEmailUser@verifyNewEmailUser')->name('email.verify');
+        Route::post('change','ChangeEmailUser@sendConfirmChangeEmail')->name('email.change');
+        Route::match(['get','post'],'verify/{token}','ChangeEmailUser@verifyNewEmailUser')->name('email.verify');
 
     });
 

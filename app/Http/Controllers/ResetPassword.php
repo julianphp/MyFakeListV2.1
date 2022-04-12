@@ -19,7 +19,7 @@ class ResetPassword extends Controller
      * @param Request $req
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function RequestResetPassword(Request $req)
+    public function requestResetPassword(Request $req)
     {
         if (Auth::check()) {
             return redirect()->intended('inicio');

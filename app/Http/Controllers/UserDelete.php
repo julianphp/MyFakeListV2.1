@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Mail\ChangeEmailUser;
+use App\Mail\ChangeEmailUserMail;
 use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ public function sendDeleteCon(){
         $user->save();
 
         try {
-            Mail::to($user->email)->send(new ChangeEmailUser($token));
+            Mail::to($user->email)->send(new ChangeEmailUserMail($token));
             return redirect()->back()->with('successMailDelAcc',true);
         } catch (\Exception $e){
             Log::channel('daily')->debug($e);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Mail\ChangeEmailUser;
+use App\Mail\ChangeEmailUserMail;
 use App\Models\EmailChange;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 
-class changeEmailUser extends Controller
+class ChangeEmailUser extends Controller
 {
     /** Send an email for verify the change of the new email. Check if the new email is in use or not, and create a new entry in the table email_change.
      * @param Request $req
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function changeEmailUser(Request $req){
+    public function sendConfirmChangeEmail(Request $req){
         if (Auth::id()) {
 
             $validator = Validator::make($req->all(),[
@@ -48,7 +48,7 @@ class changeEmailUser extends Controller
             $newChange->save();
 
             try {
-                Mail::to($newEmail)->send(new ChangeEmailUser($token));
+                Mail::to($newEmail)->send(new ChangeEmailUserMail($token));
                 return redirect()->back()->with('successEmail', $newEmail);
             } catch (\Exception $e) {
                 Log::channel('daily')->debug($e);

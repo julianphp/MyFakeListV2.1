@@ -9,6 +9,7 @@ use Session;
 
 /**
  * Class ServicioCorreo
+ * Old Class not in use
  * @package App\Http\Controllers
  */
 class ServicioCorreo extends Mailable

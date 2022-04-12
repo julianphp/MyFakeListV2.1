@@ -9,7 +9,9 @@ return [
     'closeSesion' => 'Close Sesion',
     'meta_title' => 'The best webpage to follow anime status.',
     'meta_description' => 'Your new web to follow anime.',
-
+    'language' => 'Language',
+    'language_flag_spain' => 'Spain flag',
+    'language_flag_uk' => 'Flag uk',
     'choose_score' => 'Choose an score.',
 
 

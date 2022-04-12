@@ -9,7 +9,9 @@ return [
     'closeSesion' => 'Cerrar Sesion',
     'meta_title' => 'La mejor pagina de seguimiento de anime.',
     'meta_description' => 'Tu nueva web de seguimiento de anime.',
-
+    'language' => 'Idioma',
+    'language_flag_spain' => 'Bandera de España',
+    'language_flag_uk' => 'Bandera uk',
     'choose_score' => 'Elige una puntuacion.',
 
 

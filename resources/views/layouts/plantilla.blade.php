@@ -2,7 +2,7 @@
 <head>
     <title>@yield('title') </title>
     <link rel="icon" href="{{ asset('storage/favicon.ico') }}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('css/librarys/bootstrap4-6.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/librarys/bootstrap5.css') }}">
     <script
         src="{{ asset('js/librarys/jquery3-6.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
@@ -52,8 +52,8 @@
     const language = '{{ App::getLocale() }}';
 </script>
 <script src="{{ asset('js/globalFunctions/sendRequest.js') }}"></script>
-<script src="{{ asset('js/librarys/popper-1-16.js') }}"></script>
-<script src="{{ asset('js/librarys/bootstrap4-6.js') }}"></script>
+<script src="{{ asset('js/librarys/popper2-10.js') }}"></script>
+<script src="{{ asset('js/librarys/bootstrap5.js') }}"></script>
 <script src="{{ asset('js/language/langGeneric.js') }}"></script>
 @yield('footer-script')
 

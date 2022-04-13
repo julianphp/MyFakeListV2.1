@@ -20,7 +20,7 @@ return [
     'search'=> 'Busca Anime o Usuarios',
     'search.result' => 'Resultado de la busqueda:',
     'search.anime.no' => 'No se encuentran animes con ese nombre.',
-    'search.users.no' => 'No se encuentras usuarios con ese nombre.',
+    'search.users.no' => 'No se encuentran usuarios con ese nombre.',
 
     'register.passV' => 'Escribe al menos 6 caracteres',
     'register.passC' => 'La contraseña no coincide',

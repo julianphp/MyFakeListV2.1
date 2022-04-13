@@ -1,45 +1,19 @@
 /**
- * Search AJAX, seaarch anime an users
- * @param texto
+ * Busqueda global de series y usuarios.
  */
-function obtener_registros(texto)
-{
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('busqueda').addEventListener('keyup', function (e) {
+        if (e.target.value !== "" && e.target.value.length >= 3) {
+            setTimeout(function () {
+                sendRequest("/busqueda1", {
+                    'texto' : e.target.value
+                }).then( data => {
+                    if (typeof data.error !== "undefined") {
+                        return;
+                    }
+                    document.getElementById('resultadoBus').innerHTML = data;
+                });
+            }, 500);
         }
     });
-
-    $.ajax({
-        url : APP_URL+'/busqueda1',
-        type : 'POST',
-        dataType: 'HTML',
-        data : { texto: texto,
-
-        },
-    })
-
-        .done(function(data){
-            console.log(data)
-
-            $("#resultadoBus").html(data);
-        })
-}
-
-/**
- * Send the characterer type in the search box
- */
-$(document).on('keyup', '#busqueda', function()
-{
-
-    var valorBusqueda=$(this).val();
-    //alert(valorBusqueda)
-    if (valorBusqueda!=""){
-        obtener_registros(valorBusqueda);
-    }
-    else {
-        $("#resultadoBus").html("");
-    }
-
-
 });

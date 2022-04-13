@@ -8,6 +8,7 @@ use App\Models\Serie;
 use App\Models\Usuario;
 use App\Models\UsuSerie;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,25 +74,28 @@ class SerieController extends Controller
 
     /** AJAX SEARCH. Search anime and users
      * @param Request $req
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return false|string
+     * @throws \JsonException
      */
      public function busqueda(Request $req){
-        if ($req->ajax()){
-            $serie = Serie::titulo($req->get('texto'));
-            $usuario = Usuario::usuario($req->get('texto'));
-            if ($serie->isEmpty()){
-                $serie = false;
-            } if ($usuario->isEmpty()){
-                $usuario = false;
-            }
-           // echo "<pre>".print_r($serie, true)."</pre>";
-            return view("busqueda1",['ser' => $serie,'usu' => $usuario]);
-         //   return $req->get('texto');
+         $txt = $req->get('texto');
+         if (strlen($txt) > 2 && !(substr_count($txt, " ") === strlen($txt) )) {
+             $serie = Serie::titulo($req->get('texto'));
+             $usuario = Usuario::usuario($req->get('texto'));
+             if ($serie->isEmpty()) {
+                 $serie = false;
+             }
+             if ($usuario->isEmpty()) {
+                 $usuario = false;
+             }
+             return json_encode(view("busqueda1", ['ser' => $serie, 'usu' => $usuario])->render());
+         }
 
-            //return response()->json($data);
-        }
-       // return view('busqueda', ['dat' => $texto]);
-    }
+         return json_encode(view("busqueda1", ['ser' => false, 'usu' => false])->render());
+
+
+
+     }
 
 
 

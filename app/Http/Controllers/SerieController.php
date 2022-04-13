@@ -78,20 +78,27 @@ class SerieController extends Controller
      * @throws \JsonException
      */
      public function busqueda(Request $req){
-         $txt = $req->get('texto');
-         if (strlen($txt) > 2 && !(substr_count($txt, " ") === strlen($txt) )) {
-             $serie = Serie::titulo($req->get('texto'));
-             $usuario = Usuario::usuario($req->get('texto'));
-             if ($serie->isEmpty()) {
-                 $serie = false;
+         try {
+             $txt = $req->get('texto');
+             if (strlen($txt) > 2 && !(substr_count($txt, " ") === strlen($txt) )) {
+                 $serie = Serie::titulo($req->get('texto'));
+                 $usuario = Usuario::usuario($req->get('texto'));
+                 if ($serie->isEmpty()) {
+                     $serie = false;
+                 }
+                 if ($usuario->isEmpty()) {
+                     $usuario = false;
+                 }
+                 return json_encode(view("busqueda1", ['ser' => $serie, 'usu' => $usuario])->render());
              }
-             if ($usuario->isEmpty()) {
-                 $usuario = false;
-             }
-             return json_encode(view("busqueda1", ['ser' => $serie, 'usu' => $usuario])->render());
+
+             return json_encode(view("busqueda1", ['ser' => false, 'usu' => false])->render());
+         } catch (\Exception $e) {
+             \Log::channel('daily')->debug($e);
+             return json_encode(view("busqueda1", ['ser' => false, 'usu' => false])->render());
+
          }
 
-         return json_encode(view("busqueda1", ['ser' => false, 'usu' => false])->render());
 
 
 

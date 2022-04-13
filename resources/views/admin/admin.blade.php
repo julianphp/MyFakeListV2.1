@@ -75,16 +75,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Borrado de Usuario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ¿Estas seguro de querer <span id="txt"></span> <b><span id="nick"></span></b>, con el correo
                 <b><span id="email"></span></b>?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="del btn btn-danger ">Borrar</button>
                 <button type="button" class="rec btn btn-danger ">Recuperar</button>
             </div>

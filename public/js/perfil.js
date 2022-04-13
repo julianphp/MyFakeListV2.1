@@ -1,30 +1,14 @@
-
-$(document).ready(function () {
-    /**
-     * Show the modal 1 for change the password
-     */
-    $(".btn1").click(function () {
-
-        $(".modal1").modal();
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('btnEmail').addEventListener('click', function () {
+        let myModal = new bootstrap.Modal(document.getElementById('modalChangeEmail'))
+        myModal.toggle();
     });
-    /**
-     * Show the modal 2 for change the email
-     */
-    $("#btnEmail").click(function () {
-
-        $(".modal2").modal();
-    });
-    $("#btnDelAcc").click(function () {
-
-        $(".modal3").modal();
-    });
-    /**
-     * Get the name of the file for upload an avatar
-     */
-    $('.custom-file-input').on('change', function() {
-        let fileName = $(this).val().split('\\').pop();
-        $(this).next('.custom-file-label').addClass("selected").html(fileName);
-        $('.uplpht').removeAttr('disabled');
-    });
+    document.getElementById('btnDelAcc').addEventListener('click', function () {
+        new bootstrap.Modal(document.getElementById('modalDeleteAccount')).toggle();
+    })
+    document.getElementById('inputPhotoUser').addEventListener('change', function () {
+        document.getElementById('btnUploadPhotoUser').disabled = false;
+    })
 });
+
 

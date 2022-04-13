@@ -44,13 +44,11 @@
         <div><a class="btn btn-primary" href="{{ route('lista.ver',['idUsu'=> $usuario->idUsu,'alias' => $usuario->alias]) }}" role="button">@lang('profile.list')</a>       </div>
 
     @if( $edit == true)
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#infoUsu">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#infoUsu">
                 @lang('profile.edit.profile')
             </button>
             @if( $usuario->is_admin == 1)
-
                     <a class="btn btn-info" href="{{ route('administracion') }}" role="button">@lang('profile.admin')</a>
-
             @endif
         @endif
 
@@ -96,7 +94,7 @@
 
 
 @if($edit == true)
-@include('perfil.ajustes')
+@include('perfil.modals.ajustes')
 @endif
     <script src="{{ asset('js/chart.js') }}"></script>
 @endsection

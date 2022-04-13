@@ -3,22 +3,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">@lang('profile.edit.popup') <b> {{ $user->alias }}</b></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="post" action="{{ route('perfil.foto') }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="col form-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="img" id="img">
-                            <label class="custom-file-label" for="customFile">@lang('profile.edit.photo')</label>
-                        </div>
-
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">@lang('profile.edit.photo')</label>
+                        <input class="form-control" type="file" id="inputPhotoUser" name="img">
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary uplpht" disabled type="submit">@lang('profile.edit.photo.save')</button>
+                        <button class="btn btn-primary" id="btnUploadPhotoUser" disabled type="submit">@lang('profile.edit.photo.save')</button>
                     </div>
                 </form>
 
@@ -40,19 +35,19 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#staticBackdrop">
+                    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         @lang('profile.pass')
                     </button>
-                    <button type="button" class="btn btn-primary " id="btnEmail" data-toggle="modal2" data-target="#staticBackdrop1">
+                    <button type="button" class="btn btn-primary " id="btnEmail" data-bs-toggle="modal2" data-bs-target="#staticBackdrop1">
                         @lang('profile.email')
                     </button>
-                    <button type="button" class="btn btn-danger" id="btnDelAcc" data-toggle="modal3" data-target="#staticBackdrop3">
+                    <button type="button" class="btn btn-danger" id="btnDelAcc" data-bs-toggle="modal3" data-bs-target="#staticBackdrop3">
                         @lang('profile.deleteAccount')
                     </button>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('profile.edit.close')</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('profile.edit.close')</button>
                     <button type="submit" class="btn btn-primary">@lang('profile.edit.save')</button>
                 </div>
             </form>
@@ -61,7 +56,7 @@
         </div>
     </div>
 </div>
-@include('perfil.changeEmail')
+@include('perfil.modals.changeEmail')
 
-@include('perfil.changepass')
-@include('perfil.deleteAccount')
+@include('perfil.modals.changepass')
+@include('perfil.modals.deleteAccount')

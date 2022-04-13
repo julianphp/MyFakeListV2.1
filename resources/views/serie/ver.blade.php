@@ -31,7 +31,7 @@
 
 
 
-                        <li><b>@lang('anime.genre'):</b>
+                        <li><b>@lang('anime.genre')</b>
                              @foreach($gen as $item)
                             {{$item->genero}}@if($loop->last). @else, @endif
 
@@ -65,7 +65,7 @@
                         {{-- Mostramos en el desplegable con el estado en que tiene la serie--}}
                         <div class="form-group">
                             <p>@lang('anime.statusUser')</p>
-                            <select id="selectStatus" class="form-control selEst" data-ser="{{$serie->idSe}}">
+                            <select id="selectStatus" class="form-select selEst" data-ser="{{$serie->idSe}}">
 
                                 @foreach($estados as $estado)
                                     @if($estado == $serieUsu[0]->status)
@@ -95,7 +95,7 @@
                         <!-- SELECTOR DE PUNTUACION -->
                         <div class="form-group">
                             <p>@lang('anime.score')</p>
-                            <select class="form-control score selectScoreUser" data-ser="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">
+                            <select class="form-select score selectScoreUser" data-ser="{{$serie->idSe}}" data-usu="{{$user->idUsu}}">
 
                                 @for($x = 0; $x <=10;$x++)
                                     @if((int)$serieUsu[0]->score === $x)
@@ -131,72 +131,69 @@
                 </div>
             @endif
 
-
-
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-
-                @if( $serie->trailer != "NULL")
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Trailer</a>
-                    </li>
-                @endif
-
-                <li class="nav-item">
-                    <a class="nav-link {{ $serie->trailer == "NULL" ? "active" : "" }}" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">@lang('anime.description')</a>
-                </li>
-                    @if($rel != false)
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">@lang('anime.related')</a>
-                </li>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    @if( $serie->trailer != "NULL")
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="trailer-tab" data-bs-toggle="tab" data-bs-target="#trailer"
+                                    type="button" role="tab" aria-controls="Trailer" aria-selected="true">Trailer
+                            </button>
+                        </li>
                     @endif
-
-
-            </ul>
-            <div class="tab-content" id="myTabContent">
-
-
-                @if($serie->trailer != "NULL")
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" data-autoplay="0" src="{{ $serie->trailer}}" allowfullscreen></iframe>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {{ $serie->trailer == "NULL" ? "active" : "" }}" id="description-tab" data-bs-toggle="tab" data-bs-target="#description"
+                                type="button" role="tab" aria-controls="@lang('anime.description')"
+                                aria-selected="false">
+                            @lang('anime.description')
+                        </button>
+                    </li>
+                        @if($rel != false)
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="related-tab" data-bs-toggle="tab" data-bs-target="#related"
+                                        type="button" role="tab" aria-controls="@lang('anime.related')"
+                                        aria-selected="false">
+                                    @lang('anime.related')
+                                </button>
+                            </li>
+                        @endif
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    @if($serie->trailer != "NULL")
+                    <div class="tab-pane fade show active" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="{{ $serie->trailer}}" title="YouTube video" allowfullscreen></iframe>
+                        </div>
                     </div>
-
-                </div>
-                @endif
-                <div class="tab-pane fade  {{ $serie->trailer == "NULL" ? "show active" : "" }}" id="profile" role="tabpanel" aria-labelledby="profile-tab">{{$serie->descripcion != "" ? $serie->descripcion : " No hay informacion disponible todavia." }}</div>
-
-                @if($rel != false)
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-
-
-
-                    @foreach($rel as $item)  {{--recorremos los animes relacionados--}}
-                    <ul>
+                    @endif
+                        <div class="tab-pane fade {{ $serie->trailer == "NULL" ? "show active" : "" }}" id="description"
+                             role="tabpanel" aria-labelledby="description-tab">
+                            {{$serie->descripcion != "" ? $serie->descripcion : trans('anime.no_description') }}
+                        </div>
+                        @if($rel != false)
+                            <div class="tab-pane fade" id="related" role="tabpanel" aria-labelledby="related-tab">
+                                @foreach($rel as $item)  {{--recorremos los animes relacionados--}}
+                                <ul>
 
 
-                            <li><b>{{ $item->tipo }}</b><br></li> <p>
+                                    <li><b>{{ $item->tipo }}</b><br></li> <p>
 
-                            @foreach($serRel as $rel) {{-- entramos en el array con la info de las series concretas [x][] --}}
-                                @foreach($rel as $serie)  {{-- entramos en el array [x][y] --}}
-                                    @if($item->idRel == $serie->idSe)
-                             <a href="{{ route('serie.ver', ['idSe' => $serie->idSe, 'titulo' => $serie->titulo])  }}">{{$serie->titulo}} </a>
-                                    @endif
-                                    @endforeach
+                                        @foreach($serRel as $rel) {{-- entramos en el array con la info de las series concretas [x][] --}}
+                                        @foreach($rel as $serie)  {{-- entramos en el array [x][y] --}}
+                                        @if($item->idRel == $serie->idSe)
+                                            <a href="{{ route('serie.ver', ['idSe' => $serie->idSe, 'titulo' => $serie->titulo])  }}">{{$serie->titulo}} </a>
+                                        @endif
+                                        @endforeach
+                                        @endforeach
+
+
+                                        <a href=""><br></a>
+
+                                    </p>
+
+                                </ul>
                                 @endforeach
-
-
-                            <a href=""><br></a>
-
-                        </p>
-
-                    </ul>
-                    @endforeach
-
+                            </div>
+                        @endif
                 </div>
-                @endif
-
-            </div>
-
         </div>
 
     </div> <!-- end row -->

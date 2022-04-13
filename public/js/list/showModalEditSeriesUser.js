@@ -5,6 +5,8 @@ btnModalEdit.forEach( item => {
         document.getElementById('idSeM').value = e.target.dataset.idse;
         document.getElementById('tit').value = e.target.dataset.tit;
         document.getElementById('cap').value = e.target.dataset.cap;
+        document.getElementById('cap').max = e.target.dataset.caplast;
+        document.getElementById('capLast').innerText = e.target.dataset.caplast;
         document.getElementById('rev').value = e.target.dataset.rev;
         document.getElementById('fec_ini').innerText = e.target.dataset.ini;
         document.getElementById('fec_fin').innerText = e.target.dataset.fin === "" ? "No terminada aun." : e.target.dataset.fin;
@@ -24,6 +26,6 @@ btnModalEdit.forEach( item => {
             favD.hidden = true;
         }
         document.getElementById('modalSelectStatus').value = sts;
-        $("#staticBackdrop").modal('show');
+        new bootstrap.Modal(document.getElementById('modalListaEditarSerie')).show();
     });
 });

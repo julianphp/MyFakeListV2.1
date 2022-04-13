@@ -2,7 +2,7 @@ window.addEventListener('load', function () {
     const btnDelete = document.getElementById('btnd');
     if (btnDelete) {
         btnDelete.addEventListener('click', function () {
-            $("#borrarserie").modal();
+            new bootstrap.Modal(document.getElementById('modalDeleteSerieFromUserList')).show();
             document.getElementById('del').addEventListener('click', function () {
                 sendRequest('/serie/borrarUsuSe', {
                     'usu': document.getElementById('idUsuM').value,

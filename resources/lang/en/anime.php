@@ -12,17 +12,17 @@ return [
   'fecEmi' => 'Launch Date:',
   'fecEnd' => 'End Date:',
   'genre' => 'Genre:',
-    'notAvalaible' => 'Not Available.',
+  'notAvalaible' => 'Not Available.',
+  'no_description' => 'No information available yet.',
 
-
-    'add' => 'Add to my list',
+  'add' => 'Add to my list',
   'statusUser' => 'Status:',
   'episodesUser' => 'Episodes Watches:',
   'score' => 'Score:',
   'delete' => 'Remove from my list',
-    'deleteFav' => 'Remove from my Favorite List',
+  'deleteFav' => 'Remove from my Favorite List',
 
-    'favorite' => 'Add to favorites:',
+  'favorite' => 'Add to favorites',
 
   'deleteTitle' => 'Are you sure that delete?',
   'deleteText' => 'Are you sure that delete',

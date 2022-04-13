@@ -62,8 +62,9 @@
                 <td class="align-middle text-center">
                     <p class="text-justify"><img alt="{{ $ser->titulo }}" src="{{ $ser->img }}" width="40%">
                         <a class="edit" href="#"
-                        data-idse="{{$ser->idSe}}" data-titulo="{{$ser->titulo}}" data-sts="{{$ser->status}}"
-                           data-fav="{{$ser->favorita}}" data-cap="{{$ser->capitulo}}" data-ini="{{$ser->fec_add}}" data-fin="{{$ser->fec_end}}"
+                           data-idse="{{$ser->idSe}}" data-titulo="{{$ser->titulo}}" data-sts="{{$ser->status}}"
+                           data-fav="{{$ser->favorita}}" data-cap="{{$ser->capitulo}}" data-ini="{{$ser->fec_add}}"
+                           data-fin="{{$ser->fec_end}}" data-caplast="{{ $ser->episodios }}"
                            data-rev="{{$ser->review}}"
                         >@lang('list.edit')</a>
                     </p>
@@ -94,7 +95,7 @@
             </tr>
 
             @endforeach
-            @include('lista.editar')
+            @include('lista.modals.editar')
         @endif
 
 

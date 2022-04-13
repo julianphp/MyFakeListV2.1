@@ -1,12 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalListaEditarSerie" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel"><span id="titulo"></span></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="post" action="{{ route('editSerieUsu') }}">
@@ -20,10 +18,10 @@
                             <label for="status" class="col-md-6">@lang('list.status')</label>
                         </div>
                         <div class="col-sm-6">
-                            <select id="modalSelectStatus" class="form-control selEst" name="status" >
+                            <select id="modalSelectStatus" class="form-select selEst" name="status" aria-label="Estado Serie">
 
                                 @foreach($estados as $estado)
-                                    <option>{{ $estado == "Para_Ver" ? "Para Ver" : $estado }} </option>
+                                    <option>{{ $estado === "Para_Ver" ? "Para Ver" : $estado }} </option>
                                 @endforeach
                             </select>
                         </div>
@@ -33,10 +31,10 @@
                         <div class="col-sm-3">
                             <label for="status" class="col-md-5">@lang('list.episodes')</label>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="input-group-append">
-                                <input  type="number" class="form-control" value=""  id="cap" name="cap" >
-                                <span class="input-group-text" id="basic-addon2">/ 12</span>
+                        <div class="col-sm-6">
+                            <div class="input-group mb-3">
+                                <input type="number" value="" id="cap" name="cap" class="form-control" min="0" aria-label="Cap" aria-describedby="basic-addon2">
+                                <span class="input-group-text" id="capLast"></span>
                             </div>
                         </div>
                     </div>
@@ -71,7 +69,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('profile.edit.close')</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('profile.edit.close')</button>
                         <button type="submit" class="btn btn-primary" id="env">@lang('profile.edit.save')</button>
                     </div>
                 </form>
